@@ -1,7 +1,7 @@
 # Личный проект «Что посмотреть»
 
 * Студент: [Serafima Mokrousova](https://up.htmlacademy.ru/react/8/user/1247093).
-* Наставник: `Неизвестно`.
+* Наставник: [Ruslan Malogulko](https://htmlacademy.ru/profile/id9728).
 
 ---
 
