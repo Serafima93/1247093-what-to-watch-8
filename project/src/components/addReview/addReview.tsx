@@ -1,4 +1,4 @@
-function Review(): JSX.Element {
+function AddReview(): JSX.Element {
   return (
     <>
       <div className="add-review">
@@ -140,4 +140,4 @@ function Review(): JSX.Element {
   );
 }
 
-export default Review;
+export default AddReview;

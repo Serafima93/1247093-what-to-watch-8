@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';
 
-// я же в дальнейшем буду получать массив объектов фильмов поэтому сделала так
+
 const FilmsCardsCount = {
   FILMS_COUNT: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 };

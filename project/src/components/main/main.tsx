@@ -1,4 +1,4 @@
-import FilmCard from '../film/films';
+import FilmCard from '../film/film';
 
 type MainPageCard = {
   filmsCount: number[];
