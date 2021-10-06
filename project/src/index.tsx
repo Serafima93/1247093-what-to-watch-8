@@ -15,7 +15,7 @@ const FilmDescription = {
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* я понимаю что это слишком длинно, но не знаю как сделать это короче */}
+    {}
     <App
       filmsCount={FilmsCardsCount.FILMS_COUNT}
       filmName={FilmDescription.filmName}
