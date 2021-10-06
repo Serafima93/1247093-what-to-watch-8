@@ -1,4 +1,3 @@
-
 function FilmCard(): JSX.Element {
   return (
     <>
@@ -17,7 +16,7 @@ function FilmCard(): JSX.Element {
           </a>
         </h3>
       </article>
-      {/*это извращение. Ибо иначе eslint ругается и не разрешает фрагмент. А дивы портят верстку*/}
+      {}
     </>
   );
 }

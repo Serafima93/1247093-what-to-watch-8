@@ -1,4 +1,4 @@
-function Review(): JSX.Element {
+function AddReview(): JSX.Element {
   return (
     <>
       <div className="add-review">
@@ -135,9 +135,9 @@ function Review(): JSX.Element {
           </div>
         </form>
       </div>
-      {/*это извращение. Ибо иначе eslint ругается и не разрешает фрагмент. А дивы портят верстку*/}
+      {}
     </>
   );
 }
 
-export default Review;
+export default AddReview;
