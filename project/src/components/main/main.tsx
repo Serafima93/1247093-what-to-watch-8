@@ -1,20 +1,21 @@
 import FilmCard from '../film/film';
 import Logo from '../logo/logo';
+// import { FilmSturcture } from '../../types/filmCards';
 
 type MainPageCard = {
   filmsCount: number[];
 };
 
 type filmParameters = {
-  filmName: string;
-  filmType: string;
-  filmDate: number;
-}
+  name: string;
+  genre: string;
+  released: number;
+};
 
 // что принимает функция  - количество карточек и данные верхней карты
 
 function MainPage(props: MainPageCard & filmParameters): JSX.Element {
-  const { filmsCount , filmName , filmType, filmDate } = props;
+  const { filmsCount, name, genre, released } = props;
   return (
     <section className="welcome">
       <body>
@@ -29,7 +30,7 @@ function MainPage(props: MainPageCard & filmParameters): JSX.Element {
           <h1 className="visually-hidden">WTW</h1>
 
           <header className="page-header film-card__head">
-            <Logo/>
+            <Logo />
 
             <ul className="user-block">
               <li className="user-block__item">
@@ -43,7 +44,9 @@ function MainPage(props: MainPageCard & filmParameters): JSX.Element {
                 </div>
               </li>
               <li className="user-block__item">
-                <a className="user-block__link">Sign out</a>
+                <a className="user-block__link" href="s">
+                  Sign out
+                </a>
               </li>
             </ul>
           </header>
@@ -60,10 +63,10 @@ function MainPage(props: MainPageCard & filmParameters): JSX.Element {
               </div>
 
               <div className="film-card__desc">
-                <h2 className="film-card__title">{filmName}</h2>
+                <h2 className="film-card__title">{name}</h2>
                 <p className="film-card__meta">
-                  <span className="film-card__genre">{filmType}</span>
-                  <span className="film-card__year">{filmDate}</span>
+                  <span className="film-card__genre">{genre}</span>
+                  <span className="film-card__year">{released}</span>
                 </p>
 
                 <div className="film-card__buttons">
@@ -97,52 +100,52 @@ function MainPage(props: MainPageCard & filmParameters): JSX.Element {
 
             <ul className="catalog__genres-list">
               <li className="catalog__genres-item catalog__genres-item--active">
-                <a href="#" className="catalog__genres-link">
+                <a href="#s" className="catalog__genres-link">
                   All genres
                 </a>
               </li>
               <li className="catalog__genres-item">
-                <a href="#" className="catalog__genres-link">
+                <a href="#s" className="catalog__genres-link">
                   Comedies
                 </a>
               </li>
               <li className="catalog__genres-item">
-                <a href="#" className="catalog__genres-link">
+                <a href="#s" className="catalog__genres-link">
                   Crime
                 </a>
               </li>
               <li className="catalog__genres-item">
-                <a href="#" className="catalog__genres-link">
+                <a href="s#" className="catalog__genres-link">
                   Documentary
                 </a>
               </li>
               <li className="catalog__genres-item">
-                <a href="#" className="catalog__genres-link">
+                <a href="#s" className="catalog__genres-link">
                   Dramas
                 </a>
               </li>
               <li className="catalog__genres-item">
-                <a href="#" className="catalog__genres-link">
+                <a href="#s" className="catalog__genres-link">
                   Horror
                 </a>
               </li>
               <li className="catalog__genres-item">
-                <a href="#" className="catalog__genres-link">
+                <a href="#s" className="catalog__genres-link">
                   Kids &amp; Family
                 </a>
               </li>
               <li className="catalog__genres-item">
-                <a href="#" className="catalog__genres-link">
+                <a href="#s" className="catalog__genres-link">
                   Romance
                 </a>
               </li>
               <li className="catalog__genres-item">
-                <a href="#" className="catalog__genres-link">
+                <a href="s#" className="catalog__genres-link">
                   Sci-Fi
                 </a>
               </li>
               <li className="catalog__genres-item">
-                <a href="#" className="catalog__genres-link">
+                <a href="#s" className="catalog__genres-link">
                   Thrillers
                 </a>
               </li>
@@ -163,7 +166,7 @@ function MainPage(props: MainPageCard & filmParameters): JSX.Element {
 
           <footer className="page-footer">
             <div className="logo">
-              <a className="logo__link logo__link--light">
+              <a className="logo__link logo__link--light" href="ss">
                 <span className="logo__letter logo__letter--1">W</span>
                 <span className="logo__letter logo__letter--2">T</span>
                 <span className="logo__letter logo__letter--3">W</span>
