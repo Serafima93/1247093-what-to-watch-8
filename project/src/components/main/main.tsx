@@ -25,7 +25,7 @@ function MainPage(props: MainPageCard & filmParameters): JSX.Element {
             />
           </div>
 
-          <h1 className="visually-hidden">WTW</h1>
+          <h1 className="visually-hidden">WTW </h1>
 
           <header className="page-header film-card__head">
             <Logo />
@@ -94,7 +94,7 @@ function MainPage(props: MainPageCard & filmParameters): JSX.Element {
 
         <div className="page-content">
           <section className="catalog">
-            <h2 className="catalog__title visually-hidden">Catalog {filmsCount.length}</h2>
+            <h2 className="catalog__title visually-hidden">Catalog</h2>
 
             <ul className="catalog__genres-list">
               <li className="catalog__genres-item catalog__genres-item--active">
