@@ -1,10 +1,10 @@
-import { FilmSturcture } from '../types/filmCards';
+import { FilmStructure } from '../types/filmCards';
 
-export const films: FilmSturcture[] = [
+export const films: FilmStructure[] = [
   {
     id: 1,
     name: 'The Grand Budapest Hotel',
-    posterImage: 'img/the-grand-budapest-hotel-poster.jpg',
+    posterImage: 'img/bg-the-grand-budapest-hotel.jpg',
     previewImage: 'img/the-grand-budapest-hotel.jpg',
     backgroundImage: 'img/the-grand-budapest-hotel-bg.jpg',
     backgroundColor: '#ffffff',
@@ -25,7 +25,7 @@ export const films: FilmSturcture[] = [
     ],
     runTime: 99,
     genre: 'Comedy',
-    released: 2021,
+    released: 1991,
     isFavorite: false,
   },
   {

@@ -1,21 +1,19 @@
 import FilmCard from '../film/film';
 import Logo from '../logo/logo';
-// import { FilmSturcture } from '../../types/filmCards';
+import { FilmStructure } from '../../types/filmCards';
 
 type MainPageCard = {
-  filmsCount: number[];
+  filmsCount: any;
 };
 
 type filmParameters = {
-  name: string;
-  genre: string;
-  released: number;
+  structure: FilmStructure;
 };
 
 // что принимает функция  - количество карточек и данные верхней карты
 
 function MainPage(props: MainPageCard & filmParameters): JSX.Element {
-  const { filmsCount, name, genre, released } = props;
+  const { filmsCount, structure } = props;
   return (
     <section className="welcome">
       <body>
@@ -45,7 +43,7 @@ function MainPage(props: MainPageCard & filmParameters): JSX.Element {
               </li>
               <li className="user-block__item">
                 <a className="user-block__link" href="s">
-                  Sign out
+                  Sign out {structure.genre}
                 </a>
               </li>
             </ul>
@@ -63,10 +61,10 @@ function MainPage(props: MainPageCard & filmParameters): JSX.Element {
               </div>
 
               <div className="film-card__desc">
-                <h2 className="film-card__title">{name}</h2>
+                <h2 className="film-card__title">{structure.name}</h2>
                 <p className="film-card__meta">
-                  <span className="film-card__genre">{genre}</span>
-                  <span className="film-card__year">{released}</span>
+                  <span className="film-card__genre">{structure.genre}</span>
+                  <span className="film-card__year">{structure.released}</span>
                 </p>
 
                 <div className="film-card__buttons">
@@ -96,7 +94,7 @@ function MainPage(props: MainPageCard & filmParameters): JSX.Element {
 
         <div className="page-content">
           <section className="catalog">
-            <h2 className="catalog__title visually-hidden">Catalog</h2>
+            <h2 className="catalog__title visually-hidden">Catalog {filmsCount.length}</h2>
 
             <ul className="catalog__genres-list">
               <li className="catalog__genres-item catalog__genres-item--active">
@@ -152,8 +150,8 @@ function MainPage(props: MainPageCard & filmParameters): JSX.Element {
             </ul>
 
             <div className="catalog__films-list">
-              {filmsCount.map((i: number) => (
-                <FilmCard key={i + 1} />
+              {filmsCount.map((i: any) => (
+                <FilmCard cardStructure = {structure} key={i + 1} />
               ))}
             </div>
 

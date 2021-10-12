@@ -1,20 +1,27 @@
-// import { FilmSturcture } from '../../types/filmCards';
+import { FilmStructure } from '../../types/filmCards';
 
-function FilmCard(): JSX.Element {
+type cardParameters = {
+  cardStructure: FilmStructure;
+};
+
+
+function FilmCard(props: cardParameters): JSX.Element {
+  const { cardStructure } = props;
+
   return (
     <>
       <article className="small-film-card catalog__films-card">
         <div className="small-film-card__image">
           <img
-            src="img/midnight-special.jpg"
-            alt="Midnight Special"
+            src={cardStructure.posterImage}
+            alt={cardStructure.name}
             width="280"
             height="175"
           />
         </div>
         <h3 className="small-film-card__title">
           <a className="small-film-card__link" href="film-page.html">
-            Midnight Special
+            {cardStructure.name}
           </a>
         </h3>
       </article>
@@ -22,25 +29,5 @@ function FilmCard(): JSX.Element {
     </>
   );
 }
-
-// function FilmCard(props: FilmSturcture): JSX.Element {
-//   const { name } = props;
-
-//   return (
-//     <>
-//       <article className="small-film-card catalog__films-card">
-//         <div className="small-film-card__image">
-//           <img src={name} alt={name} width="280" height="175" />
-//         </div>
-//         <h3 className="small-film-card__title">
-//           <a className="small-film-card__link" href="film-page.html">
-//             {name}
-//           </a>
-//         </h3>
-//       </article>
-//       {}
-//     </>
-//   );
-// }
 
 export default FilmCard;

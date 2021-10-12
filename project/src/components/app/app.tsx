@@ -9,26 +9,22 @@ import MyList from '../myList/myList';
 import Player from '../player/player';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
-// import { FilmSturcture } from '../../types/filmCards';
+import { FilmStructure } from '../../types/filmCards';
 
 type AppScreenProps = {
-  filmsCount: number[];
-  name: string;
-  genre: string;
-  released: number;
+  filmsCount: any;
+  filmStructure: FilmStructure;
 };
 
-function App(props:  AppScreenProps): JSX.Element {
-  const { name, genre, released, filmsCount } = props;
+function App(props: AppScreenProps): JSX.Element {
+  const { filmsCount, filmStructure } = props;
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.Main}>
           <MainPage
             filmsCount={filmsCount}
-            name={name}
-            genre={genre}
-            released={released}
+            structure = {filmStructure}
           />
         </Route>
         <Route exact path={AppRoute.Player}>

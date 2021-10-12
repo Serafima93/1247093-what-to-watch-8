@@ -1,4 +1,4 @@
-export type FilmSturcture = {
+export type FilmStructure = {
   id: number;
   name: string;
   posterImage: string;
