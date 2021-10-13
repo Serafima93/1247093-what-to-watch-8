@@ -1,6 +1,6 @@
 import { FilmComment } from '../types/filmCards';
 
-export const films: FilmComment[] = [
+export const comments: FilmComment[] = [
   {
     id: 1,
     user: {

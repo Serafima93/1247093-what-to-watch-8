@@ -2,22 +2,25 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { AppRoute /*AuthorizationStatus*/ } from '../../consts';
 
 import MainPage from '../main/main';
-import AddReview from '../addReview/addReview';
+import UsersReview from '../review.tsx/user-reviews';
 // import FilmCard from '../film/film';
 import Login from '../login/login';
 import MyList from '../myList/myList';
 import Player from '../player/player';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 // import PrivateRoute from '../private-route/private-route';
-import { FilmStructure } from '../../types/filmCards';
+import { FilmStructure, FilmComment } from '../../types/filmCards';
+
 
 type AppScreenProps = {
   filmsCount: FilmStructure[];
   filmStructure: FilmStructure;
+  commentsCount: FilmComment[];
+  filmComments: FilmComment;
 };
 
 function App(props: AppScreenProps): JSX.Element {
-  const { filmsCount, filmStructure } = props;
+  const { filmsCount, filmStructure, filmComments, commentsCount } = props;
   return (
     <BrowserRouter>
       <Switch>
@@ -36,8 +39,11 @@ function App(props: AppScreenProps): JSX.Element {
         <Route exact path={AppRoute.SignIn}>
           <Login />
         </Route>
-        <Route exact path={AppRoute.AddReview}>
-          <AddReview />
+        <Route exact path={AppRoute.UsersReview}>
+          <UsersReview
+            reviewCount = {commentsCount}
+            reviewStructure = {filmComments}
+          />
         </Route>
         <Route exact path={AppRoute.MyList}>
           <MyList  filmsCount = {filmsCount} />
