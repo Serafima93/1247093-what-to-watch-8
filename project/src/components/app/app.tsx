@@ -28,7 +28,7 @@ function App(props: AppScreenProps): JSX.Element {
           />
         </Route>
         <Route exact path={AppRoute.Player}>
-          <Player />
+          <Player playerStructure = {filmStructure}/>
         </Route>
         {/* <Route exact path={AppRoute.Film}>
           <FilmCard />
