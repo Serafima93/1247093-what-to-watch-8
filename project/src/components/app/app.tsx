@@ -12,8 +12,7 @@ import PrivateRoute from '../private-route/private-route';
 import { FilmStructure } from '../../types/filmCards';
 
 type AppScreenProps = {
-  // Как иначе передать массив объектов
-  filmsCount: any;
+  filmsCount: FilmStructure[];
   filmStructure: FilmStructure;
 };
 

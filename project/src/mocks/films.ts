@@ -30,10 +30,10 @@ export const films: FilmStructure[] = [
   },
   {
     id: 2,
-    name: 'Avatar',
-    posterImage: 'img/avatar.jpg',
-    previewImage: 'img/avatar.jpg',
-    backgroundImage: 'img/avatar.jpg',
+    name: 'What we do in the shadows',
+    posterImage: 'img/what-we-do-in-the-shadows.jpg',
+    previewImage: 'img/what-we-do-in-the-shadows.jpg',
+    backgroundImage: 'img/what-we-do-in-the-shadows.jpg',
     backgroundColor: 'red',
     videoLink:
       'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',

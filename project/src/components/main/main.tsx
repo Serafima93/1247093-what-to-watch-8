@@ -3,7 +3,7 @@ import Logo from '../logo/logo';
 import { FilmStructure } from '../../types/filmCards';
 
 type MainPageCard = {
-  filmsCount: any;
+  filmsCount: FilmStructure[];
 };
 
 type filmParameters = {
@@ -150,8 +150,9 @@ function MainPage(props: MainPageCard & filmParameters): JSX.Element {
             </ul>
 
             <div className="catalog__films-list">
-              {filmsCount.map((i: any) => (
-                <FilmCard cardStructure = {structure} key={i + 1} />
+
+              {filmsCount.map((film: FilmStructure) => (
+                <FilmCard cardStructure={film} key={film.id} />
               ))}
             </div>
 
