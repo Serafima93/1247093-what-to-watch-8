@@ -1,5 +1,5 @@
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../consts';
+import { AppRoute /*AuthorizationStatus*/ } from '../../consts';
 
 import MainPage from '../main/main';
 import AddReview from '../addReview/addReview';
@@ -8,7 +8,7 @@ import Login from '../login/login';
 import MyList from '../myList/myList';
 import Player from '../player/player';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
-import PrivateRoute from '../private-route/private-route';
+// import PrivateRoute from '../private-route/private-route';
 import { FilmStructure } from '../../types/filmCards';
 
 type AppScreenProps = {
@@ -39,13 +39,16 @@ function App(props: AppScreenProps): JSX.Element {
         <Route exact path={AppRoute.AddReview}>
           <AddReview />
         </Route>
-        <PrivateRoute
+        <Route exact path={AppRoute.MyList}>
+          <MyList  filmsCount = {filmsCount} />
+        </Route>
+        {/* <PrivateRoute
           exact
           path={AppRoute.MyList}
           render={() => <MyList />}
           authorizationStatus={AuthorizationStatus.NoAuth}
         >
-        </PrivateRoute>
+        </PrivateRoute> */}
         <Route>
           <NotFoundScreen />
         </Route>

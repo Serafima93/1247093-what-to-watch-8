@@ -1,4 +1,4 @@
-import FilmCard from '../film/film';
+import FilmCard from '../film/filmCard';
 import Logo from '../logo/logo';
 import { FilmStructure } from '../../types/filmCards';
 
