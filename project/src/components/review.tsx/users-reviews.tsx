@@ -12,10 +12,12 @@ function UsersReview(props: userReviewParameters): JSX.Element {
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
-        <UserReview reviewStructure={reviewStructure} />;
+        {reviewCount.map((review: FilmComment) => (
+          <UserReview reviewStructure={review} key={review.user.id} />
+        ))}
       </div>
       <div className="film-card__reviews-col">
-        <UserReview reviewStructure={reviewStructure} />;{reviewCount.length};
+        <UserReview reviewStructure={reviewStructure} />
       </div>
     </div>
   );
