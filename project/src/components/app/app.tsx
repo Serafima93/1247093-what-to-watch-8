@@ -2,8 +2,8 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../consts';
 
 import MainPage from '../main/main';
-import UsersReview from '../review.tsx/users-reviews';
-// import FilmCard from '../film/film';
+import UsersReview from '../review/users-reviews';
+import AddReview from '../review/add-review';
 import Login from '../login/login';
 import MyList from '../myList/myList';
 import Player from '../player/player';
@@ -33,9 +33,9 @@ function App(props: AppScreenProps): JSX.Element {
         <Route exact path={AppRoute.Player}>
           <Player playerStructure = {filmStructure}/>
         </Route>
-        {/* <Route exact path={AppRoute.Film}>
-          <FilmCard />
-        </Route> */}
+        <Route exact path={AppRoute.AddReview}>
+          <AddReview />
+        </Route>
         <Route exact path={AppRoute.SignIn}>
           <Login />
         </Route>

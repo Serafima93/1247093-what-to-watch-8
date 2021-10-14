@@ -1,16 +1,27 @@
+import { useState } from 'react';
+
 function AddReview(): JSX.Element {
+  const [userAnswers, setUserComment] = useState('Review text');
+  const [count, setCount] = useState(0);
+  // const [text, setText] = useState('Review text');
+
   return (
     <>
       <div className="add-review">
         <form action="#" className="add-review__form">
           <div className="rating">
             <div className="rating__stars">
+              <p>Вы кликнули {count} раз(а)</p>
+
               <input
                 className="rating__input"
                 id="star-10"
                 type="radio"
                 name="rating"
                 value="10"
+                onClick={() => {
+                  setCount(count + 1);
+                }}
               />
               <label className="rating__label" htmlFor="star-10">
                 Rating 10
@@ -123,9 +134,13 @@ function AddReview(): JSX.Element {
               className="add-review__textarea"
               name="review-text"
               id="review-text"
-              placeholder="Review text"
-            >
+              placeholder={userAnswers}
 
+              onChange={({ target }) => {
+                const value = target.value;
+                setUserComment(value);
+              }}
+            >
             </textarea>
             <div className="add-review__submit">
               <button className="add-review__btn" type="submit">
