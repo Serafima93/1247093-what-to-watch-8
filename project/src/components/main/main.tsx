@@ -1,20 +1,25 @@
-import FilmCard from '../film/film';
+/*eslint-disable no-console*/
+
+import FilmCard from '../film/film-card';
 import Logo from '../logo/logo';
+import { FilmStructure } from '../../types/filmCards';
+import { useHistory } from 'react-router-dom';
+import { AppRoute } from '../../consts';
 
 type MainPageCard = {
-  filmsCount: number[];
+  filmsCount: FilmStructure[];
 };
 
 type filmParameters = {
-  filmName: string;
-  filmType: string;
-  filmDate: number;
-}
+  structure: FilmStructure;
+};
 
 // что принимает функция  - количество карточек и данные верхней карты
 
 function MainPage(props: MainPageCard & filmParameters): JSX.Element {
-  const { filmsCount , filmName , filmType, filmDate } = props;
+  const { filmsCount, structure } = props;
+  const history = useHistory();
+
   return (
     <section className="welcome">
       <body>
@@ -26,10 +31,10 @@ function MainPage(props: MainPageCard & filmParameters): JSX.Element {
             />
           </div>
 
-          <h1 className="visually-hidden">WTW</h1>
+          <h1 className="visually-hidden">WTW </h1>
 
           <header className="page-header film-card__head">
-            <Logo/>
+            <Logo />
 
             <ul className="user-block">
               <li className="user-block__item">
@@ -43,7 +48,9 @@ function MainPage(props: MainPageCard & filmParameters): JSX.Element {
                 </div>
               </li>
               <li className="user-block__item">
-                <a className="user-block__link">Sign out</a>
+                <a className="user-block__link" href="s">
+                  Sign out {structure.genre}
+                </a>
               </li>
             </ul>
           </header>
@@ -60,10 +67,10 @@ function MainPage(props: MainPageCard & filmParameters): JSX.Element {
               </div>
 
               <div className="film-card__desc">
-                <h2 className="film-card__title">{filmName}</h2>
+                <h2 className="film-card__title">{structure.name}</h2>
                 <p className="film-card__meta">
-                  <span className="film-card__genre">{filmType}</span>
-                  <span className="film-card__year">{filmDate}</span>
+                  <span className="film-card__genre">{structure.genre}</span>
+                  <span className="film-card__year">{structure.released}</span>
                 </p>
 
                 <div className="film-card__buttons">
@@ -97,79 +104,76 @@ function MainPage(props: MainPageCard & filmParameters): JSX.Element {
 
             <ul className="catalog__genres-list">
               <li className="catalog__genres-item catalog__genres-item--active">
-                <a href="#" className="catalog__genres-link">
+                <a href="#s" className="catalog__genres-link">
                   All genres
                 </a>
               </li>
               <li className="catalog__genres-item">
-                <a href="#" className="catalog__genres-link">
+                <a href="#s" className="catalog__genres-link">
                   Comedies
                 </a>
               </li>
               <li className="catalog__genres-item">
-                <a href="#" className="catalog__genres-link">
+                <a href="#s" className="catalog__genres-link">
                   Crime
                 </a>
               </li>
               <li className="catalog__genres-item">
-                <a href="#" className="catalog__genres-link">
+                <a href="s#" className="catalog__genres-link">
                   Documentary
                 </a>
               </li>
               <li className="catalog__genres-item">
-                <a href="#" className="catalog__genres-link">
+                <a href="#s" className="catalog__genres-link">
                   Dramas
                 </a>
               </li>
               <li className="catalog__genres-item">
-                <a href="#" className="catalog__genres-link">
+                <a href="#s" className="catalog__genres-link">
                   Horror
                 </a>
               </li>
               <li className="catalog__genres-item">
-                <a href="#" className="catalog__genres-link">
+                <a href="#s" className="catalog__genres-link">
                   Kids &amp; Family
                 </a>
               </li>
               <li className="catalog__genres-item">
-                <a href="#" className="catalog__genres-link">
+                <a href="#s" className="catalog__genres-link">
                   Romance
                 </a>
               </li>
               <li className="catalog__genres-item">
-                <a href="#" className="catalog__genres-link">
+                <a href="s#" className="catalog__genres-link">
                   Sci-Fi
                 </a>
               </li>
               <li className="catalog__genres-item">
-                <a href="#" className="catalog__genres-link">
+                <a href="#s" className="catalog__genres-link">
                   Thrillers
                 </a>
               </li>
             </ul>
 
             <div className="catalog__films-list">
-              {filmsCount.map((i: number) => (
-                <FilmCard key={i + 1} />
+              {filmsCount.map((film: FilmStructure) => (
+                <FilmCard cardStructure={film} key={film.id+1} />
               ))}
             </div>
 
             <div className="catalog__more">
-              <button className="catalog__button" type="button">
+              <button
+                className="catalog__button"
+                type="button"
+                onClick={() => history.push(AppRoute.MyList)}
+              >
                 Show more
               </button>
             </div>
           </section>
 
           <footer className="page-footer">
-            <div className="logo">
-              <a className="logo__link logo__link--light">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </a>
-            </div>
-
+            <Logo />
             <div className="copyright">
               <p>© 2019 What to watch Ltd.</p>
             </div>
