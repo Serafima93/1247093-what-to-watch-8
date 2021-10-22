@@ -1,6 +1,6 @@
 /*eslint-disable no-console*/
 
-import { useState} from 'react';
+import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { FilmStructure } from '../../types/filmCards';
 // import Player from '../player/player';
@@ -14,14 +14,14 @@ function FilmCard(props: cardParameters): JSX.Element {
   const history = useHistory();
 
   const { cardStructure } = props;
-  cardStructure.name = userMouse;
+  // cardStructure.name = userMouse;
 
   return (
     <article
       className="small-film-card catalog__films-card"
       onMouseEnter={() => {
-        setUserMouse(cardStructure.name);
-        // <Player playerStructure={cardStructure}></Player>;
+        setUserMouse(userMouse);
+        history.push(`/player/${cardStructure.id}`);
       }}
       onClick={() => {
         history.push(`/films/${cardStructure.id}`);
@@ -45,13 +45,6 @@ function FilmCard(props: cardParameters): JSX.Element {
         >
         </video> */}
       </div>
-      {/* <video
-        // autoPlay
-        controls
-        src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
-        className="player__video"
-      >
-      </video> */}
       <h3 className="small-film-card__title">
         <a className="small-film-card__link" href="film-page.html">
           {cardStructure.name}

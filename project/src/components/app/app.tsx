@@ -30,9 +30,6 @@ function App(props: AppScreenProps): JSX.Element {
         <Route exact path={AppRoute.Main}>
           <MainPage filmsCount={filmsCount} structure={filmStructure} />
         </Route>
-        <Route exact path={AppRoute.Player}>
-          <Player playerStructure={filmStructure} />
-        </Route>
         <Route exact path={AppRoute.AddReview}>
           <AddReview />
         </Route>
@@ -54,7 +51,19 @@ function App(props: AppScreenProps): JSX.Element {
             return <div> No Film </div>;
           }}
         />
-
+        <Route
+          path={AppRoute.Player}
+          exact
+          render={(params) => {
+            const playerStructure = filmsCount.find(
+              (item) => item.id === Number(params.match.params.id),
+            );
+            if (playerStructure) {
+              return <Player playerStructure={playerStructure} />;
+            }
+            return <div> No Film </div>;
+          }}
+        />
         <Route exact path={AppRoute.UsersReview}>
           <UsersReview
             reviewCount={commentsCount}

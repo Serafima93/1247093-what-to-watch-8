@@ -1,19 +1,18 @@
+/*eslint-disable no-console*/
+
 import { useEffect, useState, useRef } from 'react';
 import { FilmStructure } from '../../types/filmCards';
 
 type MoviePlayer = {
   playerStructure: FilmStructure;
 };
-// type videoPlayerProps = {
-//   autoPlay: boolean;
-//   src: string;
-// }
 
 function Player(props: MoviePlayer): JSX.Element {
   const [isLoading, setIsLoading] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
 
   const { playerStructure } = props;
+
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
@@ -27,7 +26,7 @@ function Player(props: MoviePlayer): JSX.Element {
         videoRef.current = null;
       }
     };
-  }, [playerStructure.previewVideoLink]);
+  }, [playerStructure.videoLink]);
 
   useEffect(() => {
     if (videoRef.current === null) {
@@ -74,12 +73,13 @@ function Player(props: MoviePlayer): JSX.Element {
         </div>
 
         <div className="player__controls-row">
-          <button
-            type="button"
-            className="player__play"
-            disabled={isLoading}
-          >
-            <svg viewBox="0 0 19 19" width="19" height="19"  onClick={() => setIsPlaying(!isPlaying)}>
+          <button type="button" className="player__play" disabled={isLoading}>
+            <svg
+              viewBox="0 0 19 19"
+              width="19"
+              height="19"
+              onClick={() => setIsPlaying(!isPlaying)}
+            >
               <use xlinkHref={`#${isPlaying ? 'pause' : 'play-s'}`}></use>
             </svg>
             <span>Play</span>
