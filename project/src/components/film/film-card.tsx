@@ -1,11 +1,9 @@
 /*eslint-disable no-console*/
 
-import { useState } from 'react';
-import { useHistory /*, Link Route, BrowserRouter*/ } from 'react-router-dom';
-import { AppRoute } from '../../consts';
-import FilmDetailPage from '../film/film-detail';
-
+import { useState} from 'react';
+import { useHistory } from 'react-router-dom';
 import { FilmStructure } from '../../types/filmCards';
+// import Player from '../player/player';
 
 type cardParameters = {
   cardStructure: FilmStructure;
@@ -23,14 +21,10 @@ function FilmCard(props: cardParameters): JSX.Element {
       className="small-film-card catalog__films-card"
       onMouseEnter={() => {
         setUserMouse(cardStructure.name);
+        // <Player playerStructure={cardStructure}></Player>;
       }}
       onClick={() => {
-        // не понятно как передать конкретный фильм дальше понятно что по id
-
-        history.push(AppRoute.Film+cardStructure.id);
-        <FilmDetailPage detailedCardStructure={cardStructure} />;
-
-        // <Link to={AppRoute.Film+cardStructure.id} />;
+        history.push(`/films/${cardStructure.id}`);
       }}
     >
       <div className="small-film-card__image">
@@ -40,7 +34,24 @@ function FilmCard(props: cardParameters): JSX.Element {
           width="280"
           height="175"
         />
+        {/* <video
+          // autoPlay
+          // controls
+          width="280"
+          height="175"
+          src={cardStructure.videoLink}
+          className="player__video"
+          poster={cardStructure.posterImage}
+        >
+        </video> */}
       </div>
+      {/* <video
+        // autoPlay
+        controls
+        src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
+        className="player__video"
+      >
+      </video> */}
       <h3 className="small-film-card__title">
         <a className="small-film-card__link" href="film-page.html">
           {cardStructure.name}

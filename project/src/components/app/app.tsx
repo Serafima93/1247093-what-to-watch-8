@@ -1,3 +1,5 @@
+/*eslint-disable no-console*/
+
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../consts';
 
@@ -37,9 +39,22 @@ function App(props: AppScreenProps): JSX.Element {
         <Route exact path={AppRoute.SignIn}>
           <Login />
         </Route>
-        <Route path={AppRoute.Film} exact>
-          <FilmDetailPage detailedCardStructure={filmStructure} />
-        </Route>
+        <Route
+          path={AppRoute.Film}
+          exact
+          render={(params) => {
+            const detailedCardStructure = filmsCount.find(
+              (item) => item.id === Number(params.match.params.id),
+            );
+            if (detailedCardStructure) {
+              return (
+                <FilmDetailPage detailedCardStructure={detailedCardStructure} />
+              );
+            }
+            return <div> No Film </div>;
+          }}
+        />
+
         <Route exact path={AppRoute.UsersReview}>
           <UsersReview
             reviewCount={commentsCount}
