@@ -15,6 +15,7 @@ function Player(props: MoviePlayer): JSX.Element {
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
+
   useEffect(() => {
     if (videoRef.current !== null) {
       videoRef.current.onloadeddata = () => setIsLoading(false);
@@ -41,11 +42,12 @@ function Player(props: MoviePlayer): JSX.Element {
     videoRef.current.pause();
   }, [isPlaying]);
 
+
   return (
-    <div className="player">
+    <>
       <video
-        // autoPlay
-        // muted
+        autoPlay
+        muted
         // controls
         src={playerStructure.videoLink}
         className="player__video"
@@ -94,7 +96,8 @@ function Player(props: MoviePlayer): JSX.Element {
           </button>
         </div>
       </div>
-    </div>
+      {}
+    </>
   );
 }
 

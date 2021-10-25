@@ -32,8 +32,8 @@ export const films: FilmStructure[] = [
     id: 2,
     name: 'What we do in the shadows',
     posterImage: 'img/what-we-do-in-the-shadows.jpg',
-    previewImage: 'img/bg-what-we-do-in-the-shadows-bg.jpg',
-    backgroundImage: 'img/what-we-do-in-the-shadows-bg.jpg',
+    previewImage: 'img/what-we-do-in-the-shadows.jpg',
+    backgroundImage: 'img/what-we-do-in-the-shadows.jpg',
     backgroundColor: 'red',
     videoLink:
       'https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm',
