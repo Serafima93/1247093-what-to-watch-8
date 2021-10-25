@@ -1,5 +1,5 @@
 /*eslint-disable no-console*/
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { FilmStructure } from '../../types/filmCards';
 import VideoPlayer from '../player/video-player';
@@ -9,6 +9,7 @@ type cardParameters = {
   cardStructure: FilmStructure;
 };
 
+
 function FilmCard(props: cardParameters): JSX.Element {
   const [userMouse, setUserMouse] = useState('');
   const history = useHistory();
@@ -16,21 +17,12 @@ function FilmCard(props: cardParameters): JSX.Element {
 
   const { cardStructure } = props;
 
-  const Ref = useRef<HTMLHtmlElement | null>(null);
-
-  useEffect(() => {
-    if (userMouse) {
-      console.log(Ref.current);
-    }
-  }, [userMouse]);
-
   return (
     <>
       <article
-        ref={Ref}
         className="small-film-card catalog__films-card"
         onMouseEnter={() => {
-          setUserMouse(cardStructure.name);
+          setUserMouse(userMouse);
           setTimeout(() => {
             setVisibleFilmInfo((prevState) => !prevState);
           }, 1000);

@@ -8,6 +8,7 @@ type MoviePlayer = {
 
 function VideoPlayer(props: MoviePlayer): JSX.Element {
 
+
   const { playerStructure } = props;
 
   return (
