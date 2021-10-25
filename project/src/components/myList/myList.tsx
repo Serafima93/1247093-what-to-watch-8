@@ -1,5 +1,5 @@
 import Logo from '../logo/logo';
-import FilmCard from '../film/filmCard';
+import FilmCard from '../film/film-card';
 import { FilmStructure } from '../../types/filmCards';
 
 type MyListScreenProps = {
