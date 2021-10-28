@@ -16,6 +16,8 @@ const reducer = (state: State = initialState, action: Actions): State => {
       return { ...state, genre: state.genre + action.payload };
     case ActionType.ChangeFilmList:
       return { ...state, filmList: state.filmList + STEP_COUNT };
+    case ActionType.ResetFilms:
+      return { ...initialState };
     default:
       return state;
   }

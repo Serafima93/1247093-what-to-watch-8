@@ -1,10 +1,15 @@
 /*eslint-disable no-console*/
 
+import FilmGenreList from '../film/genre-list';
 import FilmCard from '../film/film-card';
 import Logo from '../logo/logo';
 import { FilmStructure } from '../../types/filmCards';
 import { useHistory } from 'react-router-dom';
 import { AppRoute } from '../../consts';
+import {bindActionCreators, Dispatch} from 'redux';
+import {connect, ConnectedProps} from 'react-redux';
+import {resetFilms as resetFilmsState} from '../../store/actions';
+import {Actions} from '../../types/actions';
 
 type MainPageCard = {
   filmsCount: FilmStructure[];
@@ -14,10 +19,21 @@ type filmParameters = {
   structure: FilmStructure;
 };
 
-// что принимает функция  - количество карточек и данные верхней карты
+// что принимает функция  - количество карточек и данные верхней
 
-function MainPage(props: MainPageCard & filmParameters): JSX.Element {
-  const { filmsCount, structure } = props;
+const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({
+  onResetFilms: resetFilmsState,
+}, dispatch);
+
+const connector = connect(null, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+type ConnectedComponentProps = PropsFromRedux & filmParameters & MainPageCard;
+
+
+function MainPage(props: ConnectedComponentProps): JSX.Element {
+  const { filmsCount, structure,  onResetFilms } = props;
   const history = useHistory();
 
   return (
@@ -76,6 +92,10 @@ function MainPage(props: MainPageCard & filmParameters): JSX.Element {
                 <button
                   className="btn btn--play film-card__button"
                   type="button"
+                  onClick={() => {
+                    onResetFilms();
+                    history.push(AppRoute.SignIn);
+                  }}
                 >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
@@ -100,60 +120,7 @@ function MainPage(props: MainPageCard & filmParameters): JSX.Element {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-
-          <ul className="catalog__genres-list">
-            <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="#s" className="catalog__genres-link">
-                All genres
-              </a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#s" className="catalog__genres-link">
-                Comedies
-              </a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#s" className="catalog__genres-link">
-                Crime
-              </a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="s#" className="catalog__genres-link">
-                Documentary
-              </a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#s" className="catalog__genres-link">
-                Dramas
-              </a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#s" className="catalog__genres-link">
-                Horror
-              </a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#s" className="catalog__genres-link">
-                Kids &amp; Family
-              </a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#s" className="catalog__genres-link">
-                Romance
-              </a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="s#" className="catalog__genres-link">
-                Sci-Fi
-              </a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#s" className="catalog__genres-link">
-                Thrillers
-              </a>
-            </li>
-          </ul>
-
+          <FilmGenreList/>
           <div className="catalog__films-list">
             {filmsCount.map((film: FilmStructure) => (
               <FilmCard cardStructure={film} key={film.id + 1} />
@@ -184,4 +151,5 @@ function MainPage(props: MainPageCard & filmParameters): JSX.Element {
   );
 }
 
-export default MainPage;
+export {MainPage};
+export default connector(MainPage);
