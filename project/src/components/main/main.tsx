@@ -6,14 +6,13 @@ import Logo from '../logo/logo';
 import { FilmStructure } from '../../types/filmCards';
 import { useHistory } from 'react-router-dom';
 import { AppRoute } from '../../consts';
-import {bindActionCreators, Dispatch} from 'redux';
-import {connect, ConnectedProps} from 'react-redux';
-import {resetFilms as resetFilmsState} from '../../store/actions';
-import {Actions} from '../../types/actions';
+import { bindActionCreators, Dispatch } from 'redux';
+import { connect, ConnectedProps } from 'react-redux';
+import { /*resetFilms as resetFilmsState,*/ changeFilmList} from '../../store/actions';
+import { filmGenreArray, FilmByGenre } from '../../store/reducer';
+import {State} from '../../types/state';
+import { Actions } from '../../types/actions';
 
-type MainPageCard = {
-  filmsCount: FilmStructure[];
-};
 
 type filmParameters = {
   structure: FilmStructure;
@@ -21,19 +20,28 @@ type filmParameters = {
 
 // что принимает функция  - количество карточек и данные верхней
 
-const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({
-  onResetFilms: resetFilmsState,
-}, dispatch);
+const mapStateToProps = ({filmList}: State) => ({
+  filmList,
+});
 
-const connector = connect(null, mapDispatchToProps);
+const mapDispatchToProps = (dispatch: Dispatch<Actions>) =>
+  bindActionCreators(
+    {
+      // onResetFilms: resetFilmsState,
+      onChangeFilmList: changeFilmList,
+    },
+    dispatch,
+  );
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-type ConnectedComponentProps = PropsFromRedux & filmParameters & MainPageCard;
-
+type ConnectedComponentProps = PropsFromRedux & filmParameters;
 
 function MainPage(props: ConnectedComponentProps): JSX.Element {
-  const { filmsCount, structure,  onResetFilms } = props;
+  const { structure, onChangeFilmList, filmList } = props;
+  const filmsCount = filmList;
   const history = useHistory();
 
   return (
@@ -93,8 +101,7 @@ function MainPage(props: ConnectedComponentProps): JSX.Element {
                   className="btn btn--play film-card__button"
                   type="button"
                   onClick={() => {
-                    onResetFilms();
-                    history.push(AppRoute.SignIn);
+                    onChangeFilmList(FilmByGenre);
                   }}
                 >
                   <svg viewBox="0 0 19 19" width="19" height="19">
@@ -120,12 +127,16 @@ function MainPage(props: ConnectedComponentProps): JSX.Element {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <FilmGenreList/>
+          <ul className="catalog__genres-list">
+            {filmGenreArray.map((film: string) => (
+              <FilmGenreList filmGenre={film} key={film + 1} />
+            ))}
+          </ul>
+
           <div className="catalog__films-list">
             {filmsCount.map((film: FilmStructure) => (
               <FilmCard cardStructure={film} key={film.id + 1} />
             ))}
-
           </div>
 
           <div className="catalog__more">
@@ -151,5 +162,5 @@ function MainPage(props: ConnectedComponentProps): JSX.Element {
   );
 }
 
-export {MainPage};
+export { MainPage };
 export default connector(MainPage);

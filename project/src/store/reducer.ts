@@ -1,21 +1,31 @@
+/*eslint-disable no-console*/
+
 import { ActionType, Actions } from '../types/actions';
 import { State } from '../types/state';
+import { films } from '../mocks/films';
 
-const FILMS_LIST = 0;
+// создание сортировки по жанрам
+let filmGenreArray: string[] = ['All genres'];
+films.forEach((item) => {
+  filmGenreArray.push(item.genre);
+});
+filmGenreArray = [...new Set(filmGenreArray)];
+
+// сортировка фильмов исходя из жанров
+const choosenGenreExample = 'Comedy';
+const FilmByGenre = films.filter((item) => item.genre === choosenGenreExample);
 
 const initialState = {
-  genre: 0,
-  filmList: FILMS_LIST,
+  genre: 'All genres',
+  filmList: films,
 };
-
-const STEP_COUNT = 1;
 
 const reducer = (state: State = initialState, action: Actions): State => {
   switch (action.type) {
     case ActionType.ChangeFilmGenre:
-      return { ...state, genre: state.genre + action.payload };
+      return { ...state, genre: state.genre };
     case ActionType.ChangeFilmList:
-      return { ...state, filmList: state.filmList + STEP_COUNT };
+      return { ...state, filmList: action.payload };
     case ActionType.ResetFilms:
       return { ...initialState };
     default:
@@ -23,4 +33,4 @@ const reducer = (state: State = initialState, action: Actions): State => {
   }
 };
 
-export { reducer };
+export { reducer, filmGenreArray, FilmByGenre };

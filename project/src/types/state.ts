@@ -1,5 +1,7 @@
 // Хранилище
+import { FilmStructure } from '../types/filmCards';
+
 export type State = {
-  genre: number;
-  filmList: number;
+  genre: string;
+  filmList: FilmStructure[];
 };

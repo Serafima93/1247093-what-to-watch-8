@@ -28,7 +28,7 @@ function App(props: AppScreenProps): JSX.Element {
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.Main}>
-          <MainPage filmsCount={filmsCount} structure={filmStructure} />
+          <MainPage structure={filmStructure} />
         </Route>
         <Route exact path={AppRoute.AddReview}>
           <AddReview />

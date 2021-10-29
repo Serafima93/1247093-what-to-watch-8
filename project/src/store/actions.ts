@@ -5,13 +5,13 @@ import {
   ResetFilmsAction
 } from '../types/actions';
 
-export const changeGenre = (count: number): ChangeGenreAction => ({
+export const changeGenre = (): ChangeGenreAction => ({
   type: ActionType.ChangeFilmGenre,
-  payload: count,
 });
 
-export const changeFilmList = (): ChangeFilmListAction => ({
+export const changeFilmList = (filmList: any): ChangeFilmListAction => ({
   type: ActionType.ChangeFilmList,
+  payload: filmList,
 });
 
 export const resetFilms = (): ResetFilmsAction => ({
