@@ -1,6 +1,6 @@
 /*eslint-disable no-console*/
 
-import FilmGenreList from '../film/genre-list';
+import FilmGenreList from '../genre-list/genre-list';
 import FilmCard from '../film/film-card';
 import Logo from '../logo/logo';
 import { FilmStructure } from '../../types/filmCards';
@@ -8,11 +8,9 @@ import { useHistory } from 'react-router-dom';
 import { AppRoute } from '../../consts';
 import { bindActionCreators, Dispatch } from 'redux';
 import { connect, ConnectedProps } from 'react-redux';
-import { /*resetFilms as resetFilmsState,*/ changeFilmList} from '../../store/actions';
-import { filmGenreArray, FilmByGenre } from '../../store/reducer';
-import {State} from '../../types/state';
+import { changeFilmList, changeGenre } from '../../store/actions';
+import { State } from '../../types/state';
 import { Actions } from '../../types/actions';
-
 
 type filmParameters = {
   structure: FilmStructure;
@@ -20,15 +18,16 @@ type filmParameters = {
 
 // что принимает функция  - количество карточек и данные верхней
 
-const mapStateToProps = ({filmList}: State) => ({
+const mapStateToProps = ({ filmList, genre }: State) => ({
   filmList,
+  genre,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) =>
   bindActionCreators(
     {
-      // onResetFilms: resetFilmsState,
       onChangeFilmList: changeFilmList,
+      onChangeActiveGenre: changeGenre,
     },
     dispatch,
   );
@@ -36,13 +35,19 @@ const mapDispatchToProps = (dispatch: Dispatch<Actions>) =>
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
-
 type ConnectedComponentProps = PropsFromRedux & filmParameters;
 
 function MainPage(props: ConnectedComponentProps): JSX.Element {
-  const { structure, onChangeFilmList, filmList } = props;
-  const filmsCount = filmList;
+  const { structure, onChangeFilmList, filmList, genre } = props;
   const history = useHistory();
+
+  // создание массива жанров. Тут ли это надо делать?
+  let filmGenreArray: string[] = ['All genres'];
+  filmList.forEach((item) => {filmGenreArray.push(item.genre);});
+  filmGenreArray = [...new Set(filmGenreArray)];
+
+  // сортировка фильмов исходя из жанров
+  const FilmByGenre = filmList.filter((item) => item.genre === genre);
 
   return (
     <>
@@ -128,13 +133,13 @@ function MainPage(props: ConnectedComponentProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <ul className="catalog__genres-list">
-            {filmGenreArray.map((film: string) => (
-              <FilmGenreList filmGenre={film} key={film + 1} />
+            {filmGenreArray.map((filmGenre: string) => (
+              <FilmGenreList filmGenre={filmGenre} key={filmGenre + 1} />
             ))}
           </ul>
 
           <div className="catalog__films-list">
-            {filmsCount.map((film: FilmStructure) => (
+            {filmList.map((film: FilmStructure) => (
               <FilmCard cardStructure={film} key={film.id + 1} />
             ))}
           </div>
