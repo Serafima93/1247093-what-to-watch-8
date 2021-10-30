@@ -8,9 +8,10 @@ import { useHistory } from 'react-router-dom';
 import { AppRoute } from '../../consts';
 import { bindActionCreators, Dispatch } from 'redux';
 import { connect, ConnectedProps } from 'react-redux';
-import { changeFilmList, changeGenre } from '../../store/actions';
+import { changeFilmList, changeGenre} from '../../store/actions';
 import { State } from '../../types/state';
 import { Actions } from '../../types/actions';
+import { films } from '../../mocks/films';
 
 type filmParameters = {
   structure: FilmStructure;
@@ -41,13 +42,15 @@ function MainPage(props: ConnectedComponentProps): JSX.Element {
   const { structure, onChangeFilmList, filmList, genre } = props;
   const history = useHistory();
 
-  // создание массива жанров. Тут ли это надо делать?
+  // создание массива жанров. Тут ли это надо делать? Вызываю моки уже трижды
   let filmGenreArray: string[] = ['All genres'];
-  filmList.forEach((item) => {filmGenreArray.push(item.genre);});
+  films.forEach((item: typeof structure) => {filmGenreArray.push(item.genre);});
   filmGenreArray = [...new Set(filmGenreArray)];
 
   // сортировка фильмов исходя из жанров
   const FilmByGenre = filmList.filter((item) => item.genre === genre);
+  console.log(FilmByGenre);
+  console.log(filmList);
 
   return (
     <>
