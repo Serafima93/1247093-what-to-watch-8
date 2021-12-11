@@ -4,7 +4,7 @@ type cardParameters = {
   cardStructure: FilmStructure;
 };
 
-function cardImage(props: cardParameters): JSX.Element {
+function CardImage(props: cardParameters): JSX.Element {
   const { cardStructure } = props;
 
   return (
@@ -22,4 +22,4 @@ function cardImage(props: cardParameters): JSX.Element {
   );
 }
 
-export default cardImage;
+export default CardImage;

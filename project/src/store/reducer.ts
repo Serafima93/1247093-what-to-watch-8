@@ -8,14 +8,20 @@ const initialState = {
   filmList: films,
 };
 
+// const initialFilmState = {
+//   filmList: films,
+// };
+
+
 const reducer = (state: State = initialState, action: Actions): State => {
+
   switch (action.type) {
     case ActionType.ChangeFilmGenre:
       return { ...state, genre: action.payload };
     case ActionType.ChangeFilmList:
       return { ...state, filmList: action.payload };
     case ActionType.ResetFilms:
-      return { ...state, filmList: films };
+      return { ...initialState };
     default:
       return state;
   }

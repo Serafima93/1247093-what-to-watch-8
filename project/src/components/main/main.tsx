@@ -6,11 +6,14 @@ import Logo from '../logo/logo';
 import { FilmStructure } from '../../types/filmCards';
 import { useHistory } from 'react-router-dom';
 import { AppRoute } from '../../consts';
+
 import { bindActionCreators, Dispatch } from 'redux';
 import { connect, ConnectedProps } from 'react-redux';
-import { changeFilmList, changeGenre} from '../../store/actions';
+
+import { changeFilmList, changeGenre } from '../../store/actions';
 import { State } from '../../types/state';
 import { Actions } from '../../types/actions';
+
 import { films } from '../../mocks/films';
 
 type filmParameters = {
@@ -19,9 +22,8 @@ type filmParameters = {
 
 // что принимает функция  - количество карточек и данные верхней
 
-const mapStateToProps = ({ filmList, genre }: State) => ({
+const mapStateToProps = ({ filmList }: State) => ({
   filmList,
-  genre,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) =>
@@ -39,18 +41,18 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux & filmParameters;
 
 function MainPage(props: ConnectedComponentProps): JSX.Element {
-  const { structure, onChangeFilmList, filmList, genre } = props;
+  const { structure, filmList } = props;
   const history = useHistory();
 
   // создание массива жанров. Тут ли это надо делать? Вызываю моки уже трижды
   let filmGenreArray: string[] = ['All genres'];
-  films.forEach((item: typeof structure) => {filmGenreArray.push(item.genre);});
+  films.forEach((item: typeof structure) => {
+    filmGenreArray.push(item.genre);
+  });
   filmGenreArray = [...new Set(filmGenreArray)];
 
   // сортировка фильмов исходя из жанров
-  const FilmByGenre = filmList.filter((item) => item.genre === genre);
-  console.log(FilmByGenre);
-  console.log(filmList);
+  // const FilmByGenre = filmList.filter((item) => item.genre === genre);
 
   return (
     <>
@@ -80,7 +82,7 @@ function MainPage(props: ConnectedComponentProps): JSX.Element {
             </li>
             <li className="user-block__item">
               <a className="user-block__link" href="s">
-                Sign out {structure.genre}
+                Sign out
               </a>
             </li>
           </ul>
@@ -108,9 +110,6 @@ function MainPage(props: ConnectedComponentProps): JSX.Element {
                 <button
                   className="btn btn--play film-card__button"
                   type="button"
-                  onClick={() => {
-                    onChangeFilmList(FilmByGenre);
-                  }}
                 >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>

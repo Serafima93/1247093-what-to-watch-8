@@ -18,6 +18,7 @@ export type ResetFilmsAction = {
   type: ActionType.ResetFilms;
 };
 
+
 export type Actions =
   | ChangeGenreAction
   | ChangeFilmListAction
