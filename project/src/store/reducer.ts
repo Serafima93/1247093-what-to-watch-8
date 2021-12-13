@@ -17,7 +17,6 @@ const initialState = {
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {
-  console.log(state);
   switch (action.type) {
     case ActionType.ChangeFilmGenre:
       return { ...state, genreFromState: action.payload };

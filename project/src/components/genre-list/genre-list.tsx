@@ -42,7 +42,6 @@ function FilmGenreList(props: ConnectedComponentProps): JSX.Element {
     // genreFromState,
   } = props;
 
-
   return (
     <>
       <li className="catalog__genres-item">
@@ -54,11 +53,14 @@ function FilmGenreList(props: ConnectedComponentProps): JSX.Element {
 
           onClick={() => {
             onResetFilmList(); // скидываю список фильмов
-            const FilmByChoosenGenre = filmListFromState.filter((item) => item.genre === filmGenre);
+
+            const FilmByChoosenGenre = filmListFromState
+              .slice()
+              .filter((item) => item.genre === filmGenre);
 
             onChangeActiveGenre(filmGenre); // нахожу в фильмах подходящие жанры и из них делаю массив
             onChangeFilmList(FilmByChoosenGenre); // запихиваю новое колличество фильмов в представление
-            console.log(filmListFromState);// Почему то у меня не обновляется хранилище по ресету
+            // Почему то у меня не обновляется хранилище по ресету/ уже скопировала массив
           }}
         >
           {filmGenre}

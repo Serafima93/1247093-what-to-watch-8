@@ -7,12 +7,11 @@ import { FilmStructure } from '../../types/filmCards';
 import { useHistory } from 'react-router-dom';
 import { AppRoute } from '../../consts';
 
-import { bindActionCreators, Dispatch } from 'redux';
+// import { bindActionCreators, Dispatch } from 'redux';
 import { connect, ConnectedProps } from 'react-redux';
 
-import { changeFilmList, changeGenre,  resetFilms } from '../../store/actions';
 import { State } from '../../types/state';
-import { Actions } from '../../types/actions';
+// import { Actions } from '../../types/actions';
 
 import { films } from '../../mocks/films';
 
@@ -24,20 +23,19 @@ type filmParameters = {
 
 const mapStateToProps = ({ filmListFromState }: State) => ({
   filmListFromState,
-  resetFilms,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<Actions>) =>
-  bindActionCreators(
-    {
-      onChangeFilmList: changeFilmList,
-      onChangeActiveGenre: changeGenre,
-      onResetFilmList: resetFilms,
-    },
-    dispatch,
-  );
+// const mapDispatchToProps = (dispatch: Dispatch<Actions>) =>
+//   bindActionCreators(
+//     {
+//       onChangeFilmList: changeFilmList,
+//       onChangeActiveGenre: changeGenre,
+//       onResetFilmList: resetFilms,
+//     },
+//     dispatch,
+//   );
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
+const connector = connect(mapStateToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux & filmParameters;
@@ -53,9 +51,7 @@ function MainPage(props: ConnectedComponentProps): JSX.Element {
   });
   filmGenreArray = [...new Set(filmGenreArray)];
 
-  // сортировка фильмов исходя из жанров
-  // const FilmByGenre = filmList.filter((item) => item.genre === genre);
-
+  console.log(filmListFromState);
 
   return (
     <>
