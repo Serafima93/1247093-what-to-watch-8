@@ -5,15 +5,15 @@ import { changeGenre, resetFilms, changeFilmList } from '../../store/actions';
 import { State } from '../../types/state';
 import { Actions } from '../../types/actions';
 
-import { films } from '../../mocks/films';
+// import { films } from '../../mocks/films';
 
 type FilmGenre = {
   filmGenre: string;
 };
 
-const mapStateToProps = ({ genre, filmList }: State) => ({
-  genre,
-  filmList,
+const mapStateToProps = ({ genreFromState, filmListFromState }: State) => ({
+  genreFromState,
+  filmListFromState,
   resetFilms,
 });
 
@@ -37,13 +37,11 @@ function FilmGenreList(props: ConnectedComponentProps): JSX.Element {
     filmGenre,
     onChangeActiveGenre,
     onResetFilmList,
-    // filmList,
     onChangeFilmList,
-    // genre,
+    filmListFromState,
+    // genreFromState,
   } = props;
 
-
-  const FilmByGenre = films.filter((item) => item.genre === filmGenre);
 
   return (
     <>
@@ -53,12 +51,14 @@ function FilmGenreList(props: ConnectedComponentProps): JSX.Element {
           className="catalog__genres-link"
           // добавить подчеркивание для выбранного фильма. Передать активный жанр?
           // genre === filmGenre ?  className="catalog__genres-link" : сlassName='catalog__genres-item--active'
+
           onClick={() => {
             onResetFilmList(); // скидываю список фильмов
+            const FilmByChoosenGenre = filmListFromState.filter((item) => item.genre === filmGenre);
+
             onChangeActiveGenre(filmGenre); // нахожу в фильмах подходящие жанры и из них делаю массив
-            onChangeFilmList(FilmByGenre); // запихиваю новое колличество фильмов в представление
-            // console.log(filmGenre); // то что прилетает по нажатию
-            // console.log(FilmByGenre);
+            onChangeFilmList(FilmByChoosenGenre); // запихиваю новое колличество фильмов в представление
+            console.log(filmListFromState);// Почему то у меня не обновляется хранилище по ресету
           }}
         >
           {filmGenre}

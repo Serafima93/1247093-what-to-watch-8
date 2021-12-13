@@ -3,23 +3,26 @@ import { ActionType, Actions } from '../types/actions';
 import { State } from '../types/state';
 import { films } from '../mocks/films';
 
+// тут или же в main?
+let filmGenreArray: string[] = ['All genres'];
+films.forEach((item: typeof films[0]) => {
+  filmGenreArray.push(item.genre);
+});
+filmGenreArray = [...new Set(filmGenreArray)];
+
+
 const initialState = {
-  genre: 'All genres',
-  filmList: films,
+  genreFromState: 'All genres',
+  filmListFromState: films,
 };
 
-// const initialFilmState = {
-//   filmList: films,
-// };
-
-
 const reducer = (state: State = initialState, action: Actions): State => {
-
+  console.log(state);
   switch (action.type) {
     case ActionType.ChangeFilmGenre:
-      return { ...state, genre: action.payload };
+      return { ...state, genreFromState: action.payload };
     case ActionType.ChangeFilmList:
-      return { ...state, filmList: action.payload };
+      return { ...state, filmListFromState: action.payload };
     case ActionType.ResetFilms:
       return { ...initialState };
     default:
@@ -27,4 +30,4 @@ const reducer = (state: State = initialState, action: Actions): State => {
   }
 };
 
-export { reducer };
+export { reducer, initialState, filmGenreArray };
