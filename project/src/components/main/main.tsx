@@ -3,15 +3,14 @@
 import FilmGenreList from '../genre-list/genre-list';
 import FilmCard from '../film/film-card';
 import Logo from '../logo/logo';
+import ShowMoreButton from '../more-button/more-button';
+
 import { FilmStructure } from '../../types/filmCards';
-import { useHistory } from 'react-router-dom';
-import { AppRoute } from '../../consts';
 
-// import { bindActionCreators, Dispatch } from 'redux';
 import { connect, ConnectedProps } from 'react-redux';
-
 import { State } from '../../types/state';
 // import { Actions } from '../../types/actions';
+// import { bindActionCreators, Dispatch } from 'redux';
 
 import { films } from '../../mocks/films';
 
@@ -41,8 +40,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux & filmParameters;
 
 function MainPage(props: ConnectedComponentProps): JSX.Element {
-  const { structure, filmListFromState} = props;
-  const history = useHistory();
+  const { structure, filmListFromState } = props;
 
   // создание массива жанров. Тут ли это надо делать? Вызываю моки уже трижды Или же все-таки в редьюсере
   let filmGenreArray: string[] = ['All genres'];
@@ -140,20 +138,11 @@ function MainPage(props: ConnectedComponentProps): JSX.Element {
           </ul>
 
           <div className="catalog__films-list">
-            {filmListFromState.map((film: FilmStructure) => (
+            {filmListFromState.slice(0,8).map((film: FilmStructure) => (
               <FilmCard cardStructure={film} key={film.id + 1} />
             ))}
           </div>
-
-          <div className="catalog__more">
-            <button
-              className="catalog__button"
-              type="button"
-              onClick={() => history.push(AppRoute.MyList)}
-            >
-              Show more
-            </button>
-          </div>
+          <ShowMoreButton />
         </section>
 
         <footer className="page-footer">
