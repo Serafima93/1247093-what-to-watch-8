@@ -14,23 +14,17 @@ const initialState = {
   genreFromState: 'All genres',
   filmListFromState: films,
   allFilmsList: films,
-  filmsCount: 0,
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {
   switch (action.type) {
     case ActionType.ChangeFilmGenre:
-      return {
-        ...state,
+      return {...state,
         genreFromState: action.payload,
-        filmListFromState:
-          action.payload === 'All genres'
-            ? state.allFilmsList
-            : state.filmListFromState.filter(
-              (item) => item.genre === action.payload),
+        filmListFromState: action.payload === 'All genres'? state.allFilmsList : state.filmListFromState.filter((item) => item.genre === action.payload),
       };
     case ActionType.ChangeFilmsCount:
-      return {...state, filmsCount: action.payload };
+      return {...state, filmListFromState: action.payload };
     case ActionType.ResetFilms:
       return { ...initialState };
     default:

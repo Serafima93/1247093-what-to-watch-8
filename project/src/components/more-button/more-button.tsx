@@ -4,26 +4,30 @@ import { FilmsCountForView } from '../../consts';
 import { bindActionCreators, Dispatch } from 'redux';
 import { Actions } from '../../types/actions';
 import { connect, ConnectedProps } from 'react-redux';
-import { changeFilmsCount } from '../../store/actions';
+import { changeFilmsCount, resetFilms } from '../../store/actions';
 
 type Films = {
   films: FilmStructure[];
 };
+const mapStateToProps = () => ({
+  resetFilms,
+});
 
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) =>
   bindActionCreators(
     {
       onChangeMoreFilms: changeFilmsCount,
+      onResetFilmList: resetFilms,
     },
     dispatch,
   );
 
-const connector = connect(mapDispatchToProps);
+const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux & Films;
 
 function ShowMoreButton(props: ConnectedComponentProps): JSX.Element {
-  const { films, onChangeMoreFilms } = props;
+  const { films, onChangeMoreFilms, onResetFilmList } = props;
 
   return (
     <div className="catalog__more">
@@ -32,8 +36,8 @@ function ShowMoreButton(props: ConnectedComponentProps): JSX.Element {
         type="button"
         onClick={() => {
           const FilmsPerStep = films.slice(FilmsCountForView.Max, FilmsCountForView.Max + FilmsCountForView.Step);
-          console.log(FilmsPerStep);
-          onChangeMoreFilms(2);
+          onResetFilmList();
+          console.log(onChangeMoreFilms(FilmsPerStep));
         }}
         // // onClick={
 

@@ -14,7 +14,7 @@ export const resetFilms = (): ResetFilmsAction => ({
   type: ActionType.ResetFilms,
 });
 
-export const changeFilmsCount = (count: number): ChangeFilmsCount => ({
+export const changeFilmsCount = (count: any): ChangeFilmsCount => ({
   type: ActionType.ChangeFilmsCount,
   payload: count,
 });
