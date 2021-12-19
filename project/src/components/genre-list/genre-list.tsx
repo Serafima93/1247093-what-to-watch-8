@@ -30,17 +30,15 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux & FilmGenre;
 
 function FilmGenreList(props: ConnectedComponentProps): JSX.Element {
-  const { filmGenre, onChangeActiveGenre, onResetFilmList } = props;
+  const { filmGenre, onChangeActiveGenre, onResetFilmList, genreFromState } =
+    props;
+
+  filmGenre === genreFromState ? console.log(filmGenre):   console.log(genreFromState);
 
   return (
     <>
-      <li className="catalog__genres-item">
-        <a
-          href="#s"
-          className="catalog__genres-link"
-          // добавить подчеркивание для выбранного фильма. Передать активный жанр?
-          // genre === filmGenre ?  className="catalog__genres-link" : сlassName='catalog__genres-item--active'
-
+      <li className={filmGenre === genreFromState ? 'catalog__genres-item catalog__genres-item--active' : 'catalog__genres-item'}>
+        <a href="#s" className="catalog__genres-link"
           onClick={() => {
             onResetFilmList();
             onChangeActiveGenre(filmGenre);
