@@ -4,15 +4,11 @@ import FilmGenreList from '../genre-list/genre-list';
 import FilmCard from '../film/film-card';
 import Logo from '../logo/logo';
 import ShowMoreButton from '../more-button/more-button';
-
 import { FilmStructure } from '../../types/filmCards';
-
 import { connect, ConnectedProps } from 'react-redux';
 import { State } from '../../types/state';
-// import { Actions } from '../../types/actions';
-// import { bindActionCreators, Dispatch } from 'redux';
+import { filmGenreArray } from '../../store/reducer';
 
-// import { films } from '../../mocks/films';
 
 type filmParameters = {
   structure: FilmStructure;
@@ -20,20 +16,9 @@ type filmParameters = {
 
 // что принимает функция  - количество карточек и данные верхней
 
-const mapStateToProps = ({ allFilmsList, filmListFromState }: State) => ({
-  allFilmsList,
+const mapStateToProps = ({  filmListFromState }: State) => ({
   filmListFromState,
 });
-
-// const mapDispatchToProps = (dispatch: Dispatch<Actions>) =>
-//   bindActionCreators(
-//     {
-//       onChangeFilmList: changeFilmList,
-//       onChangeActiveGenre: changeGenre,
-//       onResetFilmList: resetFilms,
-//     },
-//     dispatch,
-//   );
 
 const connector = connect(mapStateToProps);
 
@@ -41,14 +26,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux & filmParameters;
 
 function MainPage(props: ConnectedComponentProps): JSX.Element {
-  const { structure,allFilmsList , filmListFromState } = props;
-
-  // создание массива жанров. Тут ли это надо делать? Вызываю моки уже трижды Или же все-таки в редьюсере
-  let filmGenreArray: string[] = ['All genres'];
-  allFilmsList.forEach((item: typeof structure) => {
-    filmGenreArray.push(item.genre);
-  });
-  filmGenreArray = [...new Set(filmGenreArray)];
+  const { structure,  filmListFromState } = props;
 
 
   return (
@@ -138,7 +116,7 @@ function MainPage(props: ConnectedComponentProps): JSX.Element {
           </ul>
 
           <div className="catalog__films-list">
-            {filmListFromState.slice(0,8).map((film: FilmStructure) => (
+            {filmListFromState.slice(0, 8).map((film: FilmStructure) => (
               <FilmCard cardStructure={film} key={film.id + 1} />
             ))}
           </div>

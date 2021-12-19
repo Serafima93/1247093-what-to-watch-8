@@ -3,7 +3,7 @@ import { ActionType, Actions } from '../types/actions';
 import { State } from '../types/state';
 import { films } from '../mocks/films';
 
-// тут или же в main?
+// создание массива жанров из пришедших фильмов
 let filmGenreArray: string[] = ['All genres'];
 films.forEach((item: typeof films[0]) => {
   filmGenreArray.push(item.genre);
@@ -22,17 +22,11 @@ const reducer = (state: State = initialState, action: Actions): State => {
       return {
         ...state,
         genreFromState: action.payload,
-        filmListFromState: action.payload === 'All genres' ? state.allFilmsList : state.filmListFromState.filter(
-          (item) => item.genre === action.payload,
-        ),
+        filmListFromState:
+          action.payload === 'All genres'
+            ? state.allFilmsList
+            : state.filmListFromState.filter((item) => item.genre === action.payload),
       };
-    // case ActionType.ChangeFilmList:
-    //   return {
-    //     ...state,
-    //     filmListFromState: state.filmListFromState.filter(
-    //       (item) => item.genre === state.genreFromState
-    //     ),
-    //   };
     case ActionType.ResetFilms:
       return { ...initialState };
     default:

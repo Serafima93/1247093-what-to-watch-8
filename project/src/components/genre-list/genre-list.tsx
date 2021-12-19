@@ -5,8 +5,6 @@ import { changeGenre, resetFilms } from '../../store/actions';
 import { State } from '../../types/state';
 import { Actions } from '../../types/actions';
 
-// import { films } from '../../mocks/films';
-
 type FilmGenre = {
   filmGenre: string;
 };
@@ -22,7 +20,6 @@ const mapDispatchToProps = (dispatch: Dispatch<Actions>) =>
     {
       onChangeActiveGenre: changeGenre,
       onResetFilmList: resetFilms,
-      // onChangeFilmList: changeFilmList,
     },
     dispatch,
   );
@@ -33,13 +30,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux & FilmGenre;
 
 function FilmGenreList(props: ConnectedComponentProps): JSX.Element {
-  const {
-    filmGenre,
-    onChangeActiveGenre,
-    onResetFilmList,
-    // onChangeFilmList,
-    // genreFromState,
-  } = props;
+  const { filmGenre, onChangeActiveGenre, onResetFilmList } = props;
 
   return (
     <>
@@ -51,12 +42,8 @@ function FilmGenreList(props: ConnectedComponentProps): JSX.Element {
           // genre === filmGenre ?  className="catalog__genres-link" : сlassName='catalog__genres-item--active'
 
           onClick={() => {
-            onResetFilmList(); // скидываю список фильмов
-
-            onChangeActiveGenre(filmGenre); // нахожу в фильмах подходящие жанры и из них делаю массив
-            // onChangeFilmList();
-            // запихиваю новое колличество фильмов в представление
-            // Почему то у меня не обновляется хранилище по ресету/ уже скопировала массив
+            onResetFilmList();
+            onChangeActiveGenre(filmGenre);
           }}
         >
           {filmGenre}
