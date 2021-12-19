@@ -1,7 +1,7 @@
 import {
   ActionType,
   ChangeGenreAction,
-  ChangeFilmListAction,
+  // ChangeFilmListAction,
   ResetFilmsAction
 } from '../types/actions';
 
@@ -10,10 +10,9 @@ export const changeGenre = (genre: string): ChangeGenreAction => ({
   payload: genre,
 });
 
-export const changeFilmList = (filmList: any): ChangeFilmListAction => ({
-  type: ActionType.ChangeFilmList,
-  payload: filmList,
-});
+// export const changeFilmList = (): ChangeFilmListAction => ({
+//   type: ActionType.ChangeFilmList,
+// });
 
 export const resetFilms = (): ResetFilmsAction => ({
   type: ActionType.ResetFilms,

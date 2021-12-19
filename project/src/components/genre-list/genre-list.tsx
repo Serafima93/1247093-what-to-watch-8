@@ -1,7 +1,7 @@
 /*eslint-disable no-console*/
 import { bindActionCreators, Dispatch } from 'redux';
 import { connect, ConnectedProps } from 'react-redux';
-import { changeGenre, resetFilms, changeFilmList } from '../../store/actions';
+import { changeGenre, resetFilms } from '../../store/actions';
 import { State } from '../../types/state';
 import { Actions } from '../../types/actions';
 
@@ -22,7 +22,7 @@ const mapDispatchToProps = (dispatch: Dispatch<Actions>) =>
     {
       onChangeActiveGenre: changeGenre,
       onResetFilmList: resetFilms,
-      onChangeFilmList: changeFilmList,
+      // onChangeFilmList: changeFilmList,
     },
     dispatch,
   );
@@ -37,8 +37,7 @@ function FilmGenreList(props: ConnectedComponentProps): JSX.Element {
     filmGenre,
     onChangeActiveGenre,
     onResetFilmList,
-    onChangeFilmList,
-    filmListFromState,
+    // onChangeFilmList,
     // genreFromState,
   } = props;
 
@@ -54,12 +53,9 @@ function FilmGenreList(props: ConnectedComponentProps): JSX.Element {
           onClick={() => {
             onResetFilmList(); // скидываю список фильмов
 
-            const FilmByChoosenGenre = filmListFromState
-              .slice()
-              .filter((item) => item.genre === filmGenre);
-
             onChangeActiveGenre(filmGenre); // нахожу в фильмах подходящие жанры и из них делаю массив
-            onChangeFilmList(FilmByChoosenGenre); // запихиваю новое колличество фильмов в представление
+            // onChangeFilmList();
+            // запихиваю новое колличество фильмов в представление
             // Почему то у меня не обновляется хранилище по ресету/ уже скопировала массив
           }}
         >

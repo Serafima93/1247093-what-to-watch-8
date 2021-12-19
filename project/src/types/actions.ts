@@ -9,10 +9,9 @@ export type ChangeGenreAction = {
   payload: string;
 };
 
-export type ChangeFilmListAction = {
-  type: ActionType.ChangeFilmList;
-  payload: any;
-};
+// export type ChangeFilmListAction = {
+//   type: ActionType.ChangeFilmList;
+// };
 
 export type ResetFilmsAction = {
   type: ActionType.ResetFilms;
@@ -21,5 +20,5 @@ export type ResetFilmsAction = {
 
 export type Actions =
   | ChangeGenreAction
-  | ChangeFilmListAction
+  // | ChangeFilmListAction
   | ResetFilmsAction;

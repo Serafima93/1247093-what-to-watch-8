@@ -12,7 +12,7 @@ import { State } from '../../types/state';
 // import { Actions } from '../../types/actions';
 // import { bindActionCreators, Dispatch } from 'redux';
 
-import { films } from '../../mocks/films';
+// import { films } from '../../mocks/films';
 
 type filmParameters = {
   structure: FilmStructure;
@@ -20,7 +20,8 @@ type filmParameters = {
 
 // что принимает функция  - количество карточек и данные верхней
 
-const mapStateToProps = ({ filmListFromState }: State) => ({
+const mapStateToProps = ({ allFilmsList, filmListFromState }: State) => ({
+  allFilmsList,
   filmListFromState,
 });
 
@@ -40,16 +41,15 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux & filmParameters;
 
 function MainPage(props: ConnectedComponentProps): JSX.Element {
-  const { structure, filmListFromState } = props;
+  const { structure,allFilmsList , filmListFromState } = props;
 
   // создание массива жанров. Тут ли это надо делать? Вызываю моки уже трижды Или же все-таки в редьюсере
   let filmGenreArray: string[] = ['All genres'];
-  films.forEach((item: typeof structure) => {
+  allFilmsList.forEach((item: typeof structure) => {
     filmGenreArray.push(item.genre);
   });
   filmGenreArray = [...new Set(filmGenreArray)];
 
-  console.log(filmListFromState);
 
   return (
     <>
