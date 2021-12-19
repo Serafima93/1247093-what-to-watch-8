@@ -37,7 +37,7 @@ function ShowMoreButton(props: ConnectedComponentProps): JSX.Element {
         onClick={() => {
           const FilmsPerStep = films.slice(FilmsCountForView.Max, FilmsCountForView.Max + FilmsCountForView.Step);
           onResetFilmList();
-          console.log(onChangeMoreFilms(FilmsPerStep));
+          onChangeMoreFilms(FilmsPerStep);
         }}
         // // onClick={
 
