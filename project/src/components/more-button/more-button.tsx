@@ -27,7 +27,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux & Films;
 
 function ShowMoreButton(props: ConnectedComponentProps): JSX.Element {
-  const { films, onChangeMoreFilms, onResetFilmList } = props;
+  const { films, onChangeMoreFilms /*, onResetFilmList*/ } = props;
 
   return (
     <div className="catalog__more">
@@ -35,11 +35,20 @@ function ShowMoreButton(props: ConnectedComponentProps): JSX.Element {
         className="catalog__button"
         type="button"
         onClick={() => {
-          const FilmsPerStep = films.slice(FilmsCountForView.Max, FilmsCountForView.Max + FilmsCountForView.Step);
-          onResetFilmList();
+          const FilmsPerStep = films.slice(FilmsCountForView.Min, FilmsCountForView.Max + FilmsCountForView.Step);
+          // onResetFilmList();
+          console.log(FilmsPerStep);
           onChangeMoreFilms(FilmsPerStep);
         }}
         // // onClick={
+        /*
+        Получаем массив
+        Добавляем новые фильмы по шагу
+        Передаем их в редьюсер
+
+
+        */
+
 
         //   films
         //   .slice(this._renderedFilmCount, this._renderedFilmCount + this._renderedFilmCount)
