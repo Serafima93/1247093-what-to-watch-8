@@ -8,7 +8,7 @@ import { FilmStructure } from '../../types/filmCards';
 import { connect, ConnectedProps } from 'react-redux';
 import { State } from '../../types/state';
 import { filmGenreArray } from '../../store/reducer';
-
+import { FilmsCountForView } from '../../consts';
 
 type filmParameters = {
   structure: FilmStructure;
@@ -16,7 +16,7 @@ type filmParameters = {
 
 // что принимает функция  - количество карточек и данные верхней
 
-const mapStateToProps = ({  filmListFromState }: State) => ({
+const mapStateToProps = ({ filmListFromState }: State) => ({
   filmListFromState,
 });
 
@@ -26,8 +26,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux & filmParameters;
 
 function MainPage(props: ConnectedComponentProps): JSX.Element {
-  const { structure,  filmListFromState } = props;
-
+  const { structure, filmListFromState } = props;
 
   return (
     <>
@@ -116,14 +115,16 @@ function MainPage(props: ConnectedComponentProps): JSX.Element {
           </ul>
 
           <div className="catalog__films-list">
-            {filmListFromState.slice(0, 8).map((film: FilmStructure) => (
-              <FilmCard cardStructure={film} key={film.id + 1} />
-            ))}
+            {filmListFromState
+              .slice(FilmsCountForView.Min, FilmsCountForView.Max)
+              .map((film: FilmStructure) => (
+                <FilmCard cardStructure={film} key={film.id + 1} />
+              ))}
           </div>
-          <ShowMoreButton />
+          <ShowMoreButton films={filmListFromState}/>
         </section>
 
-        <footer className="page-footer">
+        <footer className="page-footer">s
           <Logo />
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>

@@ -14,6 +14,7 @@ const initialState = {
   genreFromState: 'All genres',
   filmListFromState: films,
   allFilmsList: films,
+  filmsCount: 0,
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {
@@ -25,8 +26,11 @@ const reducer = (state: State = initialState, action: Actions): State => {
         filmListFromState:
           action.payload === 'All genres'
             ? state.allFilmsList
-            : state.filmListFromState.filter((item) => item.genre === action.payload),
+            : state.filmListFromState.filter(
+              (item) => item.genre === action.payload),
       };
+    case ActionType.ChangeFilmsCount:
+      return {...state, filmsCount: action.payload };
     case ActionType.ResetFilms:
       return { ...initialState };
     default:

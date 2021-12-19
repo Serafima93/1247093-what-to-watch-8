@@ -33,8 +33,6 @@ function FilmGenreList(props: ConnectedComponentProps): JSX.Element {
   const { filmGenre, onChangeActiveGenre, onResetFilmList, genreFromState } =
     props;
 
-  filmGenre === genreFromState ? console.log(filmGenre):   console.log(genreFromState);
-
   return (
     <>
       <li className={filmGenre === genreFromState ? 'catalog__genres-item catalog__genres-item--active' : 'catalog__genres-item'}>

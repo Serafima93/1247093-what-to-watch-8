@@ -5,11 +5,17 @@ export enum AppRoute {
   Main = '/',
   UsersReview = '/films/:id/review',
   Player = '/player/:id',
-  AddReview = '/films/new/review'
+  AddReview = '/films/new/review',
 }
 
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
+}
+
+export enum FilmsCountForView {
+  Min = 0,
+  Max = 4,
+  Step = 3,
 }
