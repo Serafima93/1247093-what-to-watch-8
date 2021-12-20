@@ -9,7 +9,7 @@ import AddReview from '../review/add-review';
 import Login from '../login/login';
 import FilmDetailPage from '../film/film-detail';
 
-import MyList from '../myList/myList';
+import MyList from '../my-list/my-list';
 import Player from '../player/player';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';

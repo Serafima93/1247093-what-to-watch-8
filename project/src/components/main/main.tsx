@@ -8,6 +8,8 @@ import { FilmStructure } from '../../types/filmCards';
 import { connect, ConnectedProps } from 'react-redux';
 import { State } from '../../types/state';
 import { filmGenreArray } from '../../store/reducer';
+import { useEffect, useState } from 'react';
+
 
 type filmParameters = {
   structure: FilmStructure;
@@ -28,6 +30,10 @@ type ConnectedComponentProps = PropsFromRedux & filmParameters;
 
 function MainPage(props: ConnectedComponentProps): JSX.Element {
   const { structure, filmListFromState, MaxFilms, MinFilms } = props;
+
+  const [isVisibleFilmButton, setVisibleFilmButton] = useState(true);
+
+  useEffect(() => console.log('Hello from useEffect'));
 
   return (
     <>
@@ -85,6 +91,7 @@ function MainPage(props: ConnectedComponentProps): JSX.Element {
                 <button
                   className="btn btn--play film-card__button"
                   type="button"
+                  onClick={() => setVisibleFilmButton((prevState) => !prevState)}
                 >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
@@ -122,7 +129,8 @@ function MainPage(props: ConnectedComponentProps): JSX.Element {
                 <FilmCard cardStructure={film} key={film.id + 1} />
               ))}
           </div>
-          <ShowMoreButton films={filmListFromState}/>
+          {isVisibleFilmButton && <ShowMoreButton films={filmListFromState}/>}
+
         </section>
 
         <footer className="page-footer">s

@@ -5,6 +5,7 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { Actions } from '../../types/actions';
 import { connect, ConnectedProps } from 'react-redux';
 import { changeFilmsCount, resetFilms } from '../../store/actions';
+import { useEffect } from 'react';
 
 type Films = {
   films: FilmStructure[];
@@ -27,6 +28,7 @@ type ConnectedComponentProps = PropsFromRedux & Films;
 
 function ShowMoreButton(props: ConnectedComponentProps): JSX.Element {
   const { films, onChangeMoreFilms } = props;
+  useEffect(() => console.log('Hello from useEffect'));
 
   return (
     <div className="catalog__more">
@@ -35,8 +37,6 @@ function ShowMoreButton(props: ConnectedComponentProps): JSX.Element {
         type="button"
         onClick={() => {
           const FilmsPerStep = films.slice(FilmsCountForView.Min, FilmsCountForView.Max + FilmsCountForView.Step);
-          // console.log(FilmsPerStep);
-
           onChangeMoreFilms();
           if (FilmsPerStep.length >= films.length) {console.log(FilmsPerStep.length);}
         }}
