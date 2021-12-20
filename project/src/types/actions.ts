@@ -15,7 +15,6 @@ export type ResetFilmsAction = {
 };
 export type ChangeFilmsCount = {
   type: ActionType.ChangeFilmsCount;
-  payload: any;
 };
 
 export type Actions = ChangeGenreAction | ResetFilmsAction | ChangeFilmsCount;

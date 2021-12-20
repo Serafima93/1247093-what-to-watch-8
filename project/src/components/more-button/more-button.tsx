@@ -17,7 +17,6 @@ const mapDispatchToProps = (dispatch: Dispatch<Actions>) =>
   bindActionCreators(
     {
       onChangeMoreFilms: changeFilmsCount,
-      onResetFilmList: resetFilms,
     },
     dispatch,
   );
@@ -27,7 +26,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux & Films;
 
 function ShowMoreButton(props: ConnectedComponentProps): JSX.Element {
-  const { films, onChangeMoreFilms /*, onResetFilmList*/ } = props;
+  const { films, onChangeMoreFilms } = props;
 
   return (
     <div className="catalog__more">
@@ -36,30 +35,13 @@ function ShowMoreButton(props: ConnectedComponentProps): JSX.Element {
         type="button"
         onClick={() => {
           const FilmsPerStep = films.slice(FilmsCountForView.Min, FilmsCountForView.Max + FilmsCountForView.Step);
-          // onResetFilmList();
-          console.log(FilmsPerStep);
-          onChangeMoreFilms(FilmsPerStep);
+          // console.log(FilmsPerStep);
+
+          onChangeMoreFilms();
+          if (FilmsPerStep.length >= films.length) {console.log(FilmsPerStep.length);}
         }}
-        // // onClick={
-        /*
-        Получаем массив
-        Добавляем новые фильмы по шагу
-        Передаем их в редьюсер
-
-
-        */
-
-
-        //   films
-        //   .slice(this._renderedFilmCount, this._renderedFilmCount + this._renderedFilmCount)
-        //   .forEach((film) => {
-        //     this._renderFilm(filmCardContainers, film);
-        //   });
-        // this._renderedFilmCount += this._renderedFilmCount;
         // if (this._renderedFilmCount >= this._getFilms().length) {
         //   remove(this._loadMoreButtonComponent);
-        // }
-        // }
       >
         Show more
       </button>

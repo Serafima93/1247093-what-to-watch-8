@@ -8,7 +8,6 @@ import { FilmStructure } from '../../types/filmCards';
 import { connect, ConnectedProps } from 'react-redux';
 import { State } from '../../types/state';
 import { filmGenreArray } from '../../store/reducer';
-import { FilmsCountForView } from '../../consts';
 
 type filmParameters = {
   structure: FilmStructure;
@@ -16,8 +15,10 @@ type filmParameters = {
 
 // что принимает функция  - количество карточек и данные верхней
 
-const mapStateToProps = ({ filmListFromState }: State) => ({
+const mapStateToProps = ({ filmListFromState, MaxFilms, MinFilms }: State) => ({
   filmListFromState,
+  MaxFilms,
+  MinFilms,
 });
 
 const connector = connect(mapStateToProps);
@@ -26,7 +27,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux & filmParameters;
 
 function MainPage(props: ConnectedComponentProps): JSX.Element {
-  const { structure, filmListFromState } = props;
+  const { structure, filmListFromState, MaxFilms, MinFilms } = props;
 
   return (
     <>
@@ -116,7 +117,7 @@ function MainPage(props: ConnectedComponentProps): JSX.Element {
 
           <div className="catalog__films-list">
             {filmListFromState
-              .slice(FilmsCountForView.Min, FilmsCountForView.Max)
+              .slice(MinFilms, MaxFilms)
               .map((film: FilmStructure) => (
                 <FilmCard cardStructure={film} key={film.id + 1} />
               ))}
