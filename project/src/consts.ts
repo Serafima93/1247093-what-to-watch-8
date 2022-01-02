@@ -19,3 +19,8 @@ export enum FilmsCountForView {
   Max = 4,
   Step = 3,
 }
+
+export const ButtonCondition: any = {
+  Blocked : false,
+  Unblocked : true,
+};

@@ -8,7 +8,7 @@ import { FilmStructure } from '../../types/filmCards';
 import { connect, ConnectedProps } from 'react-redux';
 import { State } from '../../types/state';
 import { filmGenreArray } from '../../store/reducer';
-import { useEffect, useState } from 'react';
+import { /*useEffect,*/ useState } from 'react';
 
 
 type filmParameters = {
@@ -17,10 +17,11 @@ type filmParameters = {
 
 // что принимает функция  - количество карточек и данные верхней
 
-const mapStateToProps = ({ filmListFromState, MaxFilms, MinFilms }: State) => ({
+const mapStateToProps = ({ filmListFromState, MaxFilms, MinFilms, LoadMoreFilms }: State) => ({
   filmListFromState,
   MaxFilms,
   MinFilms,
+  LoadMoreFilms,
 });
 
 const connector = connect(mapStateToProps);
@@ -29,11 +30,15 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux & filmParameters;
 
 function MainPage(props: ConnectedComponentProps): JSX.Element {
-  const { structure, filmListFromState, MaxFilms, MinFilms } = props;
+  const { structure, filmListFromState, MaxFilms, MinFilms,  LoadMoreFilms } = props;
 
-  const [isVisibleFilmButton, setVisibleFilmButton] = useState(true);
+  const [isVisibleFilmButton, setVisibleFilmButton] = useState(LoadMoreFilms);
+  if(isVisibleFilmButton !==LoadMoreFilms){setVisibleFilmButton((prevState) => !prevState);}
 
-  useEffect(() => console.log('Hello from useEffect'));
+  // useEffect(() => console.log('Hello from useEffectMain'));
+  console.log(LoadMoreFilms);
+  console.log(isVisibleFilmButton);
+  console.log(setVisibleFilmButton);
 
   return (
     <>

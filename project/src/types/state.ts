@@ -8,4 +8,5 @@ export type State = {
   MaxFilms: number;
   MinFilms: number;
   StepFilms: number;
+  LoadMoreFilms: boolean;
 };
