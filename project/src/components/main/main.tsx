@@ -8,8 +8,11 @@ import { FilmStructure } from '../../types/filmCards';
 import { connect, ConnectedProps } from 'react-redux';
 import { State } from '../../types/state';
 import { filmGenreArray } from '../../store/reducer';
-import { /*useEffect,*/ useState } from 'react';
-
+import { useState } from 'react';
+import { bindActionCreators, Dispatch } from 'redux';
+import { Actions } from '../../types/actions';
+import { loadMoreFilms } from '../../store/actions';
+import { ButtonCondition } from '../../consts';
 
 type filmParameters = {
   structure: FilmStructure;
@@ -17,28 +20,51 @@ type filmParameters = {
 
 // что принимает функция  - количество карточек и данные верхней
 
-const mapStateToProps = ({ filmListFromState, MaxFilms, MinFilms, LoadMoreFilms }: State) => ({
+const mapStateToProps = ({
+  filmListFromState,
+  MaxFilms,
+  MinFilms,
+  LoadMoreFilms,
+}: State) => ({
   filmListFromState,
   MaxFilms,
   MinFilms,
   LoadMoreFilms,
 });
 
-const connector = connect(mapStateToProps);
+const mapDispatchToProps = (dispatch: Dispatch<Actions>) =>
+  bindActionCreators(
+    {
+      onLoadMoreFilms: loadMoreFilms,
+    },
+    dispatch,
+  );
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux & filmParameters;
 
 function MainPage(props: ConnectedComponentProps): JSX.Element {
-  const { structure, filmListFromState, MaxFilms, MinFilms,  LoadMoreFilms } = props;
+  const {
+    structure,
+    filmListFromState,
+    MaxFilms,
+    MinFilms,
+    LoadMoreFilms,
+    onLoadMoreFilms,
+  } = props;
 
   const [isVisibleFilmButton, setVisibleFilmButton] = useState(LoadMoreFilms);
-  if(isVisibleFilmButton !==LoadMoreFilms){setVisibleFilmButton((prevState) => !prevState);}
+  if (isVisibleFilmButton !== LoadMoreFilms) {setVisibleFilmButton((prevState) => !prevState);}
+  // корректно ли?
 
-  // useEffect(() => console.log('Hello from useEffectMain'));
-  console.log(LoadMoreFilms);
+  // корректно ли? Ошибка в консоли/ и три раза вызов почему?
+  if (MaxFilms >= filmListFromState.length) {onLoadMoreFilms(ButtonCondition.Blocked);}
+
+
   console.log(isVisibleFilmButton);
-  console.log(setVisibleFilmButton);
+  console.log(MaxFilms);
 
   return (
     <>
@@ -96,7 +122,6 @@ function MainPage(props: ConnectedComponentProps): JSX.Element {
                 <button
                   className="btn btn--play film-card__button"
                   type="button"
-                  onClick={() => setVisibleFilmButton((prevState) => !prevState)}
                 >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
@@ -134,11 +159,11 @@ function MainPage(props: ConnectedComponentProps): JSX.Element {
                 <FilmCard cardStructure={film} key={film.id + 1} />
               ))}
           </div>
-          {isVisibleFilmButton && <ShowMoreButton films={filmListFromState}/>}
-
+          {isVisibleFilmButton && <ShowMoreButton />}
         </section>
 
-        <footer className="page-footer">s
+        <footer className="page-footer">
+          s
           <Logo />
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>

@@ -1,15 +1,10 @@
 /*eslint-disable no-console*/
-import { FilmStructure } from '../../types/filmCards';
-import { FilmsCountForView, ButtonCondition } from '../../consts';
+// import {  ButtonCondition } from '../../consts';
 import { bindActionCreators, Dispatch } from 'redux';
 import { Actions } from '../../types/actions';
 import { connect, ConnectedProps } from 'react-redux';
-import { changeFilmsCount, resetFilms, loadMoreFilms } from '../../store/actions';
-// import { useEffect } from 'react';
+import {changeFilmsCount, resetFilms, loadMoreFilms} from '../../store/actions';
 
-type Films = {
-  films: FilmStructure[];
-};
 const mapStateToProps = () => ({
   resetFilms,
 });
@@ -25,13 +20,11 @@ const mapDispatchToProps = (dispatch: Dispatch<Actions>) =>
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
-type ConnectedComponentProps = PropsFromRedux & Films;
+type ConnectedComponentProps = PropsFromRedux;
 
 function ShowMoreButton(props: ConnectedComponentProps): JSX.Element {
-  const { films, onChangeMoreFilms, onLoadMoreFilms } = props;
-  // useEffect(() => console.log('Hello from useEffect2'));
-  // const [isVisibleFilmButton, setVisibleFilmButton] = useState(true);
-  // console.log(isVisibleFilmButton);
+  const { onChangeMoreFilms } = props;
+
 
   return (
     <div className="catalog__more">
@@ -39,12 +32,12 @@ function ShowMoreButton(props: ConnectedComponentProps): JSX.Element {
         className="catalog__button"
         type="button"
         onClick={() => {
-          const FilmsPerStep = films.slice(FilmsCountForView.Min, FilmsCountForView.Max + FilmsCountForView.Step);
+          // const FilmsPerStep = filteredFilms.slice(FilmsCountForView.Min, FilmsCountForView.Max + FilmsCountForView.Step );
           onChangeMoreFilms();
-          if (FilmsPerStep.length >= films.length) {onLoadMoreFilms(ButtonCondition.Blocked);}
+          // if (MaxFilms >= filteredFilms.length) {
+          //   onLoadMoreFilms(ButtonCondition.Blocked);
+          // }
         }}
-        // if (this._renderedFilmCount >= this._getFilms().length) {
-        //   remove(this._loadMoreButtonComponent);
       >
         Show more
       </button>
@@ -52,5 +45,5 @@ function ShowMoreButton(props: ConnectedComponentProps): JSX.Element {
   );
 }
 
-export {ShowMoreButton};
+export { ShowMoreButton };
 export default connector(ShowMoreButton);

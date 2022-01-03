@@ -17,9 +17,11 @@ export enum AuthorizationStatus {
 export enum FilmsCountForView {
   Min = 0,
   Max = 4,
-  Step = 3,
+  Step = 2,
 }
+// почему ломается если заменить на 2?
 
+// как прописать без any?
 export const ButtonCondition: any = {
   Blocked : false,
   Unblocked : true,
