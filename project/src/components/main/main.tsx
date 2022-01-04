@@ -163,7 +163,6 @@ function MainPage(props: ConnectedComponentProps): JSX.Element {
         </section>
 
         <footer className="page-footer">
-          s
           <Logo />
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>

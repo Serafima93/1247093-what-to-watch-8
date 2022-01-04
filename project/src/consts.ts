@@ -6,6 +6,7 @@ export enum AppRoute {
   UsersReview = '/films/:id/review',
   Player = '/player/:id',
   AddReview = '/films/new/review',
+  Details = '/films/new/details',
 }
 
 export enum AuthorizationStatus {
@@ -19,7 +20,6 @@ export enum FilmsCountForView {
   Max = 4,
   Step = 2,
 }
-// почему ломается если заменить на 2?
 
 // как прописать без any?
 export const ButtonCondition: any = {

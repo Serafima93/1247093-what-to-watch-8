@@ -1,12 +1,13 @@
 /*eslint-disable no-console*/
 import Logo from '../logo/logo';
 import { FilmStructure } from '../../types/filmCards';
+import Details from './details';
 
 type cardParameters = {
   detailedCardStructure: FilmStructure;
 };
 
-function FilmDetailPage(props: cardParameters): JSX.Element {
+function Tabs(props: cardParameters): JSX.Element {
   const { detailedCardStructure } = props;
 
   return (
@@ -14,7 +15,10 @@ function FilmDetailPage(props: cardParameters): JSX.Element {
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src={detailedCardStructure.previewImage} alt={detailedCardStructure.name} />
+            <img
+              src={detailedCardStructure.previewImage}
+              alt={detailedCardStructure.name}
+            />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -44,7 +48,9 @@ function FilmDetailPage(props: cardParameters): JSX.Element {
             <div className="film-card__desc">
               <h2 className="film-card__title">{detailedCardStructure.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{detailedCardStructure.genre}</span>
+                <span className="film-card__genre">
+                  {detailedCardStructure.genre}
+                </span>
                 <span className="film-card__year">
                   {detailedCardStructure.released}
                 </span>
@@ -110,17 +116,16 @@ function FilmDetailPage(props: cardParameters): JSX.Element {
               </nav>
 
               <div className="film-rating">
-                <div className="film-rating__score">{detailedCardStructure.rating}</div>
+                <div className="film-rating__score">
+                  {detailedCardStructure.rating}
+                </div>
                 <p className="film-rating__meta">
-                  <span className="film-rating__level">
-                    Very good
-                  </span>
+                  <span className="film-rating__level">Very good</span>
                   <span className="film-rating__count">
                     {detailedCardStructure.scoresCount} ratings
                   </span>
                 </p>
               </div>
-
               <div className="film-card__text">
                 <p>{detailedCardStructure.description}</p>
 
@@ -135,6 +140,8 @@ function FilmDetailPage(props: cardParameters): JSX.Element {
                   </strong>
                 </p>
               </div>
+
+              <Details detailedCardStructure = {detailedCardStructure}/>
             </div>
           </div>
         </div>
@@ -144,4 +151,4 @@ function FilmDetailPage(props: cardParameters): JSX.Element {
   );
 }
 
-export default FilmDetailPage;
+export default Tabs;

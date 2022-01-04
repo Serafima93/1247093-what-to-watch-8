@@ -7,7 +7,10 @@ import MainPage from '../main/main';
 import UsersReview from '../review/users-reviews';
 import AddReview from '../review/add-review';
 import Login from '../login/login';
-import FilmDetailPage from '../film/film-detail';
+
+import Tabs from '../tabs/tabs';
+// import Details from '../tabs/details';
+
 
 import MyList from '../my-list/my-list';
 import Player from '../player/player';
@@ -33,6 +36,9 @@ function App(props: AppScreenProps): JSX.Element {
         <Route exact path={AppRoute.AddReview}>
           <AddReview />
         </Route>
+        {/* <Route exact path={AppRoute.Details}>
+          <Details />
+        </Route> */}
         <Route exact path={AppRoute.SignIn}>
           <Login />
         </Route>
@@ -45,7 +51,7 @@ function App(props: AppScreenProps): JSX.Element {
             );
             if (detailedCardStructure) {
               return (
-                <FilmDetailPage detailedCardStructure={detailedCardStructure} />
+                <Tabs detailedCardStructure={detailedCardStructure} />
               );
             }
             return <div> No Film </div>;

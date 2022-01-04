@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { FilmStructure } from '../../types/filmCards';
 import VideoPlayer from '../player/video-player';
-import CardImage from './film';
+import CardImage from './card-image';
 
 type cardParameters = {
   cardStructure: FilmStructure;
