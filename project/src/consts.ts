@@ -3,7 +3,7 @@ export enum AppRoute {
   MyList = '/mylist',
   Film = '/films/:id',
   Main = '/',
-  UsersReview = '/films/:id/review',
+  Reviews = '/films/:id/review',
   Player = '/player/:id',
   AddReview = '/films/new/review',
   Details = '/films/new/details',
@@ -23,6 +23,12 @@ export enum FilmsCountForView {
 
 // как прописать без any?
 export const ButtonCondition: any = {
-  Blocked : false,
-  Unblocked : true,
+  Blocked: false,
+  Unblocked: true,
 };
+
+export enum TabsSections {
+  Overview = 'Overview',
+  Details = 'Details',
+  Reviews = 'Reviews',
+}

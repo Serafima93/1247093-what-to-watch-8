@@ -4,13 +4,12 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../consts';
 
 import MainPage from '../main/main';
-import UsersReview from '../review/users-reviews';
+// import Reviews from '../tabs/reviews';
 import AddReview from '../review/add-review';
 import Login from '../login/login';
 
 import Tabs from '../tabs/tabs';
 // import Details from '../tabs/details';
-
 
 import MyList from '../my-list/my-list';
 import Player from '../player/player';
@@ -27,6 +26,7 @@ type AppScreenProps = {
 
 function App(props: AppScreenProps): JSX.Element {
   const { filmsCount, filmStructure, filmComments, commentsCount } = props;
+
   return (
     <BrowserRouter>
       <Switch>
@@ -47,11 +47,14 @@ function App(props: AppScreenProps): JSX.Element {
           exact
           render={(params) => {
             const detailedCardStructure = filmsCount.find(
-              (item) => item.id === Number(params.match.params.id),
-            );
+              (item) => item.id === Number(params.match.params.id));
             if (detailedCardStructure) {
               return (
-                <Tabs detailedCardStructure={detailedCardStructure} />
+                <Tabs
+                  detailedCardStructure={detailedCardStructure}
+                  reviewCount={commentsCount}
+                  reviewStructure={filmComments}
+                />
               );
             }
             return <div> No Film </div>;
@@ -62,20 +65,16 @@ function App(props: AppScreenProps): JSX.Element {
           exact
           render={(params) => {
             const playerStructure = filmsCount.find(
-              (item) => item.id === Number(params.match.params.id),
-            );
+              (item) => item.id === Number(params.match.params.id));
             if (playerStructure) {
               return <Player playerStructure={playerStructure} />;
             }
             return <div> No Film </div>;
           }}
         />
-        <Route exact path={AppRoute.UsersReview}>
-          <UsersReview
-            reviewCount={commentsCount}
-            reviewStructure={filmComments}
-          />
-        </Route>
+        {/* <Route exact path={AppRoute.Reviews}>
+          <Reviews reviewCount={commentsCount} reviewStructure={filmComments} />
+        </Route> */}
         <PrivateRoute
           exact
           path={AppRoute.MyList}

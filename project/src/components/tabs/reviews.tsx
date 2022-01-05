@@ -1,12 +1,12 @@
 import { FilmComment } from '../../types/filmCards';
-import UserReview from './review';
+import UserReview from '../review/review';
 
 type userReviewParameters = {
   reviewStructure: FilmComment;
   reviewCount: FilmComment[];
 };
 
-function UsersReview(props: userReviewParameters): JSX.Element {
+function Reviews(props: userReviewParameters): JSX.Element {
   const { reviewStructure, reviewCount } = props;
 
   return (
@@ -23,4 +23,4 @@ function UsersReview(props: userReviewParameters): JSX.Element {
   );
 }
 
-export default UsersReview;
+export default Reviews;

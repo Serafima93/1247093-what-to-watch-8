@@ -1,14 +1,26 @@
 /*eslint-disable no-console*/
 import Logo from '../logo/logo';
 import { FilmStructure } from '../../types/filmCards';
+import { FilmComment } from '../../types/filmCards';
+import { TabsSections } from '../../consts';
 import Details from './details';
+import Reviews from './reviews';
+// import Overview from './overview';
+import { Tab } from './tab';
 
 type cardParameters = {
   detailedCardStructure: FilmStructure;
 };
 
-function Tabs(props: cardParameters): JSX.Element {
-  const { detailedCardStructure } = props;
+type userReviewParameters = {
+  reviewStructure: FilmComment;
+  reviewCount: FilmComment[];
+};
+
+function Tabs(props: cardParameters & userReviewParameters): JSX.Element {
+  const { detailedCardStructure, reviewStructure, reviewCount } = props;
+
+  const tabsSectionsArray = Object.values(TabsSections);
 
   return (
     <>
@@ -97,51 +109,22 @@ function Tabs(props: cardParameters): JSX.Element {
             <div className="film-card__desc">
               <nav className="film-nav film-card__nav">
                 <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <a href="#s" className="film-nav__link">
-                      Overview
-                    </a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#s" className="film-nav__link">
-                      Details
-                    </a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#s" className="film-nav__link">
-                      Reviews
-                    </a>
-                  </li>
+                  {tabsSectionsArray.map((tab: string) => (
+                    <Tab tabMeaning={tab} key={tab + 1} />
+                  ))}
+
                 </ul>
               </nav>
+              {/* Как правильно  - создать отдельные кнопки или их как-то массивом? и как их потом соединять с компонентом?*/}
 
-              <div className="film-rating">
-                <div className="film-rating__score">
-                  {detailedCardStructure.rating}
-                </div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">Very good</span>
-                  <span className="film-rating__count">
-                    {detailedCardStructure.scoresCount} ratings
-                  </span>
-                </p>
-              </div>
-              <div className="film-card__text">
-                <p>{detailedCardStructure.description}</p>
-
-                <p className="film-card__director">
-                  <strong>Director: {detailedCardStructure.director}</strong>
-                </p>
-
-                <p className="film-card__starring">
-                  <strong>
-                    Starring: {detailedCardStructure.starring}
-                    and other
-                  </strong>
-                </p>
-              </div>
-
-              <Details detailedCardStructure = {detailedCardStructure}/>
+              {/* {isPushing === true && (
+                <Overview detailedCardStructure={detailedCardStructure} />
+              )} */}
+              <Details detailedCardStructure={detailedCardStructure} />
+              <Reviews
+                reviewCount={reviewCount}
+                reviewStructure={reviewStructure}
+              />
             </div>
           </div>
         </div>
