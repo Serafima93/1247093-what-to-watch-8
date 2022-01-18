@@ -63,8 +63,8 @@ function MainPage(props: ConnectedComponentProps): JSX.Element {
   if (MaxFilms >= filmListFromState.length) {onLoadMoreFilms(ButtonCondition.Blocked);}
 
 
-  console.log(isVisibleFilmButton);
-  console.log(MaxFilms);
+  // console.log(isVisibleFilmButton);
+  // console.log(MaxFilms);
 
   return (
     <>

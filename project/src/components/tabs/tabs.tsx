@@ -7,9 +7,13 @@ import Details from './details';
 import Reviews from './reviews';
 // import Overview from './overview';
 import { Tab } from './tab';
+import FilmCard from '../film/film-card';
+import { FilmsCountForView } from '../../consts';
+
 
 type cardParameters = {
   detailedCardStructure: FilmStructure;
+  filmsSameGenre: FilmStructure[];
 };
 
 type userReviewParameters = {
@@ -18,7 +22,14 @@ type userReviewParameters = {
 };
 
 function Tabs(props: cardParameters & userReviewParameters): JSX.Element {
-  const { detailedCardStructure, reviewStructure, reviewCount } = props;
+  const {
+    detailedCardStructure,
+    reviewStructure,
+    reviewCount,
+    filmsSameGenre,
+  } = props;
+
+  console.log(filmsSameGenre);
 
   const tabsSectionsArray = Object.values(TabsSections);
 
@@ -112,7 +123,6 @@ function Tabs(props: cardParameters & userReviewParameters): JSX.Element {
                   {tabsSectionsArray.map((tab: string) => (
                     <Tab tabMeaning={tab} key={tab + 1} />
                   ))}
-
                 </ul>
               </nav>
               {/* Как правильно  - создать отдельные кнопки или их как-то массивом? и как их потом соединять с компонентом?*/}
@@ -129,6 +139,31 @@ function Tabs(props: cardParameters & userReviewParameters): JSX.Element {
           </div>
         </div>
       </section>
+
+      <div className="page-content">
+        <section className="catalog catalog--like-this">
+          <h2 className="catalog__title">More like this</h2>
+
+          <div className="catalog__films-list">
+            {/* вынести ли в единую функцию? Оптимизация. Подключения наноида? Убирать ли дубли? */}
+
+            {filmsSameGenre
+              .filter((item) => item.genre === detailedCardStructure.genre)
+              .slice(FilmsCountForView.Min, FilmsCountForView.Max)
+              .map((film: FilmStructure) => (
+                <FilmCard cardStructure={film} key={film.id + 1 + 4} />
+              ))}
+          </div>
+        </section>
+
+        <footer className="page-footer">
+          <Logo />
+
+          <div className="copyright">
+            <p>© 2019 What to watch Ltd.</p>
+          </div>
+        </footer>
+      </div>
       {}
     </>
   );

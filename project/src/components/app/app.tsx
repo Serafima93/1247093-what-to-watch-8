@@ -54,6 +54,7 @@ function App(props: AppScreenProps): JSX.Element {
                   detailedCardStructure={detailedCardStructure}
                   reviewCount={commentsCount}
                   reviewStructure={filmComments}
+                  filmsSameGenre = {filmsCount}
                 />
               );
             }
