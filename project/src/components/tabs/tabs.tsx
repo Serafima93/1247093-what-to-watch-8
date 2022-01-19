@@ -1,12 +1,14 @@
 /*eslint-disable no-console*/
-import Logo from '../logo/logo';
+import Footer from '../footer/footer';
+import Header from '../header/header';
+
 import { FilmStructure } from '../../types/filmCards';
 import { FilmComment } from '../../types/filmCards';
 import { TabsSections } from '../../consts';
 import Details from './details';
 import Reviews from './reviews';
-// import Overview from './overview';
-import { Tab } from './tab';
+import Overview from './overview';
+import  Tab  from './tab';
 import FilmCard from '../film/film-card';
 import { FilmsCountForView } from '../../consts';
 
@@ -29,7 +31,6 @@ function Tabs(props: cardParameters & userReviewParameters): JSX.Element {
     filmsSameGenre,
   } = props;
 
-  console.log(filmsSameGenre);
 
   const tabsSectionsArray = Object.values(TabsSections);
 
@@ -43,29 +44,8 @@ function Tabs(props: cardParameters & userReviewParameters): JSX.Element {
               alt={detailedCardStructure.name}
             />
           </div>
-
           <h1 className="visually-hidden">WTW</h1>
-
-          <header className="page-header film-card__head">
-            <Logo />
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img
-                    src="img/avatar.jpg"
-                    alt="User avatar"
-                    width="63"
-                    height="63"
-                  />
-                </div>
-              </li>
-              <li className="user-block__item">
-                <a className="user-block__link" href="a">
-                  Sign out
-                </a>
-              </li>
-            </ul>
-          </header>
+          <Header/>
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
@@ -130,6 +110,7 @@ function Tabs(props: cardParameters & userReviewParameters): JSX.Element {
               {/* {isPushing === true && (
                 <Overview detailedCardStructure={detailedCardStructure} />
               )} */}
+              <Overview detailedCardStructure={detailedCardStructure} />
               <Details detailedCardStructure={detailedCardStructure} />
               <Reviews
                 reviewCount={reviewCount}
@@ -155,14 +136,7 @@ function Tabs(props: cardParameters & userReviewParameters): JSX.Element {
               ))}
           </div>
         </section>
-
-        <footer className="page-footer">
-          <Logo />
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer/>
       </div>
       {}
     </>

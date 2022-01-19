@@ -9,4 +9,5 @@ export type State = {
   MinFilms: number;
   StepFilms: number;
   LoadMoreFilms: boolean;
+  tabFromState: string;
 };

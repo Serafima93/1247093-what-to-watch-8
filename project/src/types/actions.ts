@@ -4,6 +4,7 @@ export enum ActionType {
   ResetFilms = 'film/reset',
   ChangeFilmsCount = 'film/changeCount',
   LoadMoreFilms = 'button/loadMore',
+  ChangeTabs = 'film/changeTabs',
 }
 
 export type ChangeGenreAction = {
@@ -22,8 +23,14 @@ export type LoadMoreFilms = {
   payload: boolean;
 };
 
+export type ChangeTabs = {
+  type: ActionType.ChangeTabs;
+  payload: string;
+};
+
 export type Actions =
   | ChangeGenreAction
   | ResetFilmsAction
   | ChangeFilmsCount
-  | LoadMoreFilms;
+  | LoadMoreFilms
+  | ChangeTabs;

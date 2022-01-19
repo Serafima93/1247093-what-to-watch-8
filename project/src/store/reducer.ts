@@ -2,7 +2,7 @@
 import { ActionType, Actions } from '../types/actions';
 import { State } from '../types/state';
 import { films } from '../mocks/films';
-import { FilmsCountForView , ButtonCondition} from '../consts';
+import { FilmsCountForView, ButtonCondition } from '../consts';
 
 // создание массива жанров из пришедших фильмов
 let filmGenreArray: string[] = ['All genres'];
@@ -19,6 +19,7 @@ const initialState = {
   MinFilms: FilmsCountForView.Min,
   StepFilms: FilmsCountForView.Step,
   LoadMoreFilms: ButtonCondition.Unblocked,
+  tabFromState: 'Overview',
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {
@@ -39,6 +40,8 @@ const reducer = (state: State = initialState, action: Actions): State => {
       };
     case ActionType.LoadMoreFilms:
       return { ...state, LoadMoreFilms: action.payload };
+    case ActionType.ChangeTabs:
+      return { ...state, tabFromState: action.payload  };
     case ActionType.ResetFilms:
       return { ...initialState };
     default:
