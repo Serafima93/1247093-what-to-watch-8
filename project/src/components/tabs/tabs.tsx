@@ -8,10 +8,11 @@ import { TabsSections } from '../../consts';
 import Details from './details';
 import Reviews from './reviews';
 import Overview from './overview';
-import  Tab  from './tab';
+import Tab from './tab';
 import FilmCard from '../film/film-card';
 import { FilmsCountForView } from '../../consts';
-
+import { connect, ConnectedProps } from 'react-redux';
+import { State } from '../../types/state';
 
 type cardParameters = {
   detailedCardStructure: FilmStructure;
@@ -23,14 +24,24 @@ type userReviewParameters = {
   reviewCount: FilmComment[];
 };
 
-function Tabs(props: cardParameters & userReviewParameters): JSX.Element {
+const mapStateToProps = ({ tabFromState }: State) => ({
+  tabFromState,
+});
+
+const connector = connect(mapStateToProps);
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type ConnectedComponentProps = PropsFromRedux &
+  cardParameters &
+  userReviewParameters;
+
+function Tabs(props: ConnectedComponentProps): JSX.Element {
   const {
     detailedCardStructure,
     reviewStructure,
     reviewCount,
     filmsSameGenre,
+    tabFromState,
   } = props;
-
 
   const tabsSectionsArray = Object.values(TabsSections);
 
@@ -45,7 +56,7 @@ function Tabs(props: cardParameters & userReviewParameters): JSX.Element {
             />
           </div>
           <h1 className="visually-hidden">WTW</h1>
-          <Header/>
+          <Header />
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
@@ -105,17 +116,21 @@ function Tabs(props: cardParameters & userReviewParameters): JSX.Element {
                   ))}
                 </ul>
               </nav>
-              {/* Как правильно  - создать отдельные кнопки или их как-то массивом? и как их потом соединять с компонентом?*/}
+              {/* Как правильно  - создать отдельные кнопки или их как-то массивом?
+               и как их потом соединять с компонентом? Очень топорное решение*/}
 
-              {/* {isPushing === true && (
+              {tabFromState === 'Overview' && (
                 <Overview detailedCardStructure={detailedCardStructure} />
-              )} */}
-              <Overview detailedCardStructure={detailedCardStructure} />
-              <Details detailedCardStructure={detailedCardStructure} />
-              <Reviews
-                reviewCount={reviewCount}
-                reviewStructure={reviewStructure}
-              />
+              )}
+              {tabFromState === 'Details' && (
+                <Details detailedCardStructure={detailedCardStructure} />
+              )}
+              {tabFromState === 'Reviews' && (
+                <Reviews
+                  reviewCount={reviewCount}
+                  reviewStructure={reviewStructure}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -136,11 +151,12 @@ function Tabs(props: cardParameters & userReviewParameters): JSX.Element {
               ))}
           </div>
         </section>
-        <Footer/>
+        <Footer />
       </div>
       {}
     </>
   );
 }
 
-export default Tabs;
+export { Tabs };
+export default connector(Tabs);

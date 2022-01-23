@@ -4,13 +4,9 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../consts';
 
 import MainPage from '../main/main';
-// import Reviews from '../tabs/reviews';
 import AddReview from '../review/add-review';
 import Login from '../login/login';
-
 import Tabs from '../tabs/tabs';
-// import Details from '../tabs/details';
-
 import MyList from '../my-list/my-list';
 import Player from '../player/player';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
@@ -36,9 +32,6 @@ function App(props: AppScreenProps): JSX.Element {
         <Route exact path={AppRoute.AddReview}>
           <AddReview />
         </Route>
-        {/* <Route exact path={AppRoute.Details}>
-          <Details />
-        </Route> */}
         <Route exact path={AppRoute.SignIn}>
           <Login />
         </Route>
@@ -73,9 +66,6 @@ function App(props: AppScreenProps): JSX.Element {
             return <div> No Film </div>;
           }}
         />
-        {/* <Route exact path={AppRoute.Reviews}>
-          <Reviews reviewCount={commentsCount} reviewStructure={filmComments} />
-        </Route> */}
         <PrivateRoute
           exact
           path={AppRoute.MyList}

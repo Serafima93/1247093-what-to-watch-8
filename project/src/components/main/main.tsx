@@ -65,10 +65,6 @@ function MainPage(props: ConnectedComponentProps): JSX.Element {
   // корректно ли? Ошибка в консоли/ и три раза вызов почему?
   if (MaxFilms >= filmListFromState.length) {onLoadMoreFilms(ButtonCondition.Blocked);}
 
-
-  // console.log(isVisibleFilmButton);
-  // console.log(MaxFilms);
-
   return (
     <>
       <section className="film-card">

@@ -4,11 +4,15 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { connect, ConnectedProps } from 'react-redux';
 import { Actions } from '../../types/actions';
 import { changeTabs } from '../../store/actions';
-import { useState } from 'react';
+import { State } from '../../types/state';
 
 type TabMeaning = {
   tabMeaning: string;
 };
+
+const mapStateToProps = ({ tabFromState }: State) => ({
+  tabFromState,
+});
 
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) =>
   bindActionCreators(
@@ -18,27 +22,27 @@ const mapDispatchToProps = (dispatch: Dispatch<Actions>) =>
     dispatch,
   );
 
-const connector = connect(mapDispatchToProps);
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux & TabMeaning;
 
 function Tab(props: ConnectedComponentProps): JSX.Element {
-  const { tabMeaning, onChangeTabs } = props;
-  const [isPushing, setIsPushing] = useState(false);
+  const { tabMeaning, onChangeTabs, tabFromState } = props;
 
   return (
     <>
       <li
         className={
-          isPushing === true ? 'film-nav__item--active' : 'film-nav__item'
+          tabMeaning === tabFromState
+            ? 'film-nav__item film-nav__item--active'
+            : 'film-nav__item'
         }
       >
         <a
           // href="#"
           className="film-nav__link"
           onClick={() => {
-            setIsPushing(true);
             onChangeTabs(tabMeaning);
           }}
         >
