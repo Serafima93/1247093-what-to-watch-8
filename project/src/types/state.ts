@@ -1,5 +1,6 @@
 // Хранилище
 import { FilmStructure } from '../types/filmCards';
+import { AuthorizationStatus } from '../consts';
 
 export type State = {
   genreFromState: string;
@@ -10,4 +11,5 @@ export type State = {
   StepFilms: number;
   LoadMoreFilms: boolean;
   tabFromState: string;
+  authorizationStatus: AuthorizationStatus,
 };

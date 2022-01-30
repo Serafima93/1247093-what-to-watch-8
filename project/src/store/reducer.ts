@@ -2,7 +2,11 @@
 import { ActionType, Actions } from '../types/actions';
 import { State } from '../types/state';
 import { films } from '../mocks/films';
-import { FilmsCountForView, ButtonCondition } from '../consts';
+import {
+  FilmsCountForView,
+  ButtonCondition,
+  AuthorizationStatus
+} from '../consts';
 
 // создание массива жанров из пришедших фильмов
 let filmGenreArray: string[] = ['All genres'];
@@ -20,6 +24,7 @@ const initialState = {
   StepFilms: FilmsCountForView.Step,
   LoadMoreFilms: ButtonCondition.Unblocked,
   tabFromState: 'Overview',
+  authorizationStatus: AuthorizationStatus.Unknown,
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {
@@ -31,8 +36,7 @@ const reducer = (state: State = initialState, action: Actions): State => {
         filmListFromState:
           action.payload === 'All genres'
             ? state.allFilmsList
-            : state.filmListFromState.filter((item) => item.genre === action.payload),
-      };
+            : state.filmListFromState.filter((item) => item.genre === action.payload)};
     case ActionType.ChangeFilmsCount:
       return {
         ...state,
@@ -41,7 +45,18 @@ const reducer = (state: State = initialState, action: Actions): State => {
     case ActionType.LoadMoreFilms:
       return { ...state, LoadMoreFilms: action.payload };
     case ActionType.ChangeTabs:
-      return { ...state, tabFromState: action.payload  };
+      return { ...state, tabFromState: action.payload };
+    case ActionType.LoadFilms:
+      return { ...state, allFilmsList: films };
+
+    // case ActionType.LoadFilms: {
+    //   const { filmsTry } = action.payload;
+    //   return { ...state, filmsTry };
+    // }
+    case ActionType.RequireAuthorization:
+      return { ...state, authorizationStatus: action.payload };
+    case ActionType.RequireLogout:
+      return { ...state, authorizationStatus: AuthorizationStatus.NoAuth };
     case ActionType.ResetFilms:
       return { ...initialState };
     default:
