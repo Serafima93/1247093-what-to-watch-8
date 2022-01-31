@@ -30,3 +30,9 @@ export enum TabsSections {
   Details = 'Details',
   Reviews = 'Reviews',
 }
+
+export enum APIRoute {
+  Films = '/films',
+  Login = '/login',
+  Logout = '/logout',
+}

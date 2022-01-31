@@ -11,5 +11,6 @@ export type State = {
   StepFilms: number;
   LoadMoreFilms: boolean;
   tabFromState: string;
-  authorizationStatus: AuthorizationStatus,
+  authorizationStatus: AuthorizationStatus;
+  isDataLoaded: boolean,
 };

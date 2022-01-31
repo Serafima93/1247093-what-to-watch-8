@@ -1,5 +1,5 @@
 import { AuthorizationStatus } from '../consts';
-
+import { FilmStructure } from '../types/filmCards';
 import {
   ActionType,
   ChangeGenreAction,
@@ -12,7 +12,6 @@ import {
   RequireLogout
 } from '../types/actions';
 
-import { FilmStructure } from '../types/filmCards';
 
 export const changeGenre = (genre: string): ChangeGenreAction => ({
   type: ActionType.ChangeFilmGenre,
@@ -37,7 +36,7 @@ export const changeTabs = (name: string): ChangeTabs => ({
   payload: name,
 });
 
-export const loadFilms = (filmsFromServer: FilmStructure): LoadFilms => ({
+export const loadFilms = (filmsFromServer: FilmStructure[]): LoadFilms => ({
   type: ActionType.LoadFilms,
   payload: filmsFromServer,
 });
