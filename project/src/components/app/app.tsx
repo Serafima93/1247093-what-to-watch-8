@@ -1,7 +1,7 @@
 /*eslint-disable no-console*/
-
+import {connect, ConnectedProps} from 'react-redux';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../consts';
+import { AppRoute, AuthorizationStatus, isCheckedAuth } from '../../consts';
 
 import MainPage from '../main/main';
 import AddReview from '../review/add-review';
@@ -12,6 +12,8 @@ import Player from '../player/player';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
 import { FilmStructure, FilmComment } from '../../types/filmCards';
+import LoadingScreen from '../loading-screen/loading-screen';
+import {State} from '../../types/state';
 
 type AppScreenProps = {
   filmsCount: FilmStructure[];
@@ -20,9 +22,25 @@ type AppScreenProps = {
   filmComments: FilmComment;
 };
 
-function App(props: AppScreenProps): JSX.Element {
-  const { filmsCount, filmStructure, filmComments, commentsCount } = props;
+const mapStateToProps = ({authorizationStatus, isDataLoaded}: State) => ({
+  authorizationStatus,
+  isDataLoaded,
+});
 
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type ConnectedComponentProps = PropsFromRedux & AppScreenProps;
+
+
+function App(props: ConnectedComponentProps): JSX.Element {
+  const { filmsCount, filmStructure, filmComments, commentsCount, authorizationStatus, isDataLoaded } = props;
+
+  if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
   return (
     <BrowserRouter>
       <Switch>
@@ -81,4 +99,7 @@ function App(props: AppScreenProps): JSX.Element {
   );
 }
 
-export default App;
+export {App};
+export default connector(App);
+
+// export default App;

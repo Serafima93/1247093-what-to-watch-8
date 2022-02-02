@@ -13,4 +13,5 @@ export type State = {
   tabFromState: string;
   authorizationStatus: AuthorizationStatus;
   isDataLoaded: boolean,
+  downloadedFilms: FilmStructure[];
 };

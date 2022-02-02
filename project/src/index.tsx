@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';
@@ -11,11 +12,12 @@ import { reducer, initialState } from './store/reducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { requireAuthorization } from './store/actions';
-import { fetchQuestionAction, checkAuthAction } from './store/api-actions';
+import { fetchFilmAction, checkAuthAction } from './store/api-actions';
 import { ThunkAppDispatch } from './types/actions';
 import { AuthorizationStatus } from './consts';
 
 const api = createAPI(() =>store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth)));
+
 
 // где вызывать моки. Тут или в редьюсер?
 const store = createStore(
@@ -23,7 +25,7 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(thunk.withExtraArgument(api))));
 
 (store.dispatch as ThunkAppDispatch)(checkAuthAction());
-(store.dispatch as ThunkAppDispatch)(fetchQuestionAction());
+(store.dispatch as ThunkAppDispatch)(fetchFilmAction());
 
 ReactDOM.render(
   <React.StrictMode>

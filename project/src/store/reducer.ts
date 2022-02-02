@@ -2,6 +2,7 @@
 import { ActionType, Actions } from '../types/actions';
 import { State } from '../types/state';
 import { films } from '../mocks/films';
+import {adaptToClient} from '../components/adapter/adapter';
 import {
   FilmsCountForView,
   ButtonCondition,
@@ -26,9 +27,11 @@ const initialState = {
   tabFromState: 'Overview',
   authorizationStatus: AuthorizationStatus.Unknown,
   isDataLoaded: false,
+  downloadedFilms:[],
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {
+  console.log(state.downloadedFilms);
   switch (action.type) {
     case ActionType.ChangeFilmGenre:
       return {
@@ -48,7 +51,7 @@ const reducer = (state: State = initialState, action: Actions): State => {
     case ActionType.ChangeTabs:
       return { ...state, tabFromState: action.payload };
     case ActionType.LoadFilms:
-      return { ...state, allFilmsList: films };
+      return { ...state, downloadedFilms: adaptToClient(action.payload[0]) };
 
     // case ActionType.LoadFilms: {
     //   const { filmsTry } = action.payload;

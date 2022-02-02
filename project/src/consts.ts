@@ -36,3 +36,5 @@ export enum APIRoute {
   Login = '/login',
   Logout = '/logout',
 }
+
+export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean => authorizationStatus === AuthorizationStatus.Unknown;
