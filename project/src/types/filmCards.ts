@@ -1,5 +1,4 @@
 export type FilmStructure = {
-  id: number;
   name: string;
   posterImage: string;
   previewImage: string;
@@ -14,6 +13,7 @@ export type FilmStructure = {
   starring: string[];
   runTime: number;
   genre: string;
+  id: number;
   released: number;
   isFavorite: boolean;
 };

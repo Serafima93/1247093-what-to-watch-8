@@ -1,7 +1,7 @@
-/*eslint-disable no-console*/
+/* eslint-disable no-console */
 import {connect, ConnectedProps} from 'react-redux';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus, isCheckedAuth } from '../../consts';
+import { AppRoute, AuthorizationStatus , isCheckedAuth } from '../../consts';
 
 import MainPage from '../main/main';
 import AddReview from '../review/add-review';
@@ -32,9 +32,9 @@ const connector = connect(mapStateToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux & AppScreenProps;
 
-
 function App(props: ConnectedComponentProps): JSX.Element {
   const { filmsCount, filmStructure, filmComments, commentsCount, authorizationStatus, isDataLoaded } = props;
+
 
   if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
     return (

@@ -1,4 +1,3 @@
-/*eslint-disable no-console*/
 import Logo from '../logo/logo';
 import SingIn from '../sing-in/sing-in';
 

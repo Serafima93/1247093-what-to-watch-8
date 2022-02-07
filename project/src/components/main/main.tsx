@@ -1,10 +1,7 @@
-/*eslint-disable no-console*/
-
 import FilmGenreList from '../genre-list/genre-list';
 import FilmCard from '../film/film-card';
 import Footer from '../footer/footer';
 import Header from '../header/header';
-
 
 import ShowMoreButton from '../more-button/more-button';
 import { FilmStructure } from '../../types/filmCards';

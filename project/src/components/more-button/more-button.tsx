@@ -1,4 +1,3 @@
-/*eslint-disable no-console*/
 // import {  ButtonCondition } from '../../consts';
 import { bindActionCreators, Dispatch } from 'redux';
 import { Actions } from '../../types/actions';

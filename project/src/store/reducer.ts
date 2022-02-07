@@ -2,7 +2,7 @@
 import { ActionType, Actions } from '../types/actions';
 import { State } from '../types/state';
 import { films } from '../mocks/films';
-import {adaptToClient} from '../components/adapter/adapter';
+import { adaptToClient } from '../components/adapter/adapter';
 import {
   FilmsCountForView,
   ButtonCondition,
@@ -27,11 +27,12 @@ const initialState = {
   tabFromState: 'Overview',
   authorizationStatus: AuthorizationStatus.Unknown,
   isDataLoaded: false,
-  downloadedFilms:[],
+  downloadedFilms: [],
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {
-  console.log(state.downloadedFilms);
+  console.log(state.downloadedFilms[0]);
+
   switch (action.type) {
     case ActionType.ChangeFilmGenre:
       return {
@@ -40,7 +41,8 @@ const reducer = (state: State = initialState, action: Actions): State => {
         filmListFromState:
           action.payload === 'All genres'
             ? state.allFilmsList
-            : state.filmListFromState.filter((item) => item.genre === action.payload)};
+            : state.filmListFromState.filter((item) => item.genre === action.payload),
+      };
     case ActionType.ChangeFilmsCount:
       return {
         ...state,
@@ -51,12 +53,12 @@ const reducer = (state: State = initialState, action: Actions): State => {
     case ActionType.ChangeTabs:
       return { ...state, tabFromState: action.payload };
     case ActionType.LoadFilms:
-      return { ...state, downloadedFilms: adaptToClient(action.payload[0]) };
+      // как убрать any? Прописать type с сервера? Почему у меня при загрузке в стейт сразу куча багов?
+      return {
+        ...state,
+        downloadedFilms: action.payload.map((filmFromServer: any) =>adaptToClient(filmFromServer)),
+      };
 
-    // case ActionType.LoadFilms: {
-    //   const { filmsTry } = action.payload;
-    //   return { ...state, filmsTry };
-    // }
     case ActionType.RequireAuthorization:
       return {
         ...state,
@@ -66,7 +68,18 @@ const reducer = (state: State = initialState, action: Actions): State => {
     case ActionType.RequireLogout:
       return { ...state, authorizationStatus: AuthorizationStatus.NoAuth };
     case ActionType.ResetFilms:
-      return { ...initialState };
+      // return { ...initialState };
+      return {
+        ...state,
+        genreFromState: 'All genres',
+        filmListFromState: state.downloadedFilms,
+        allFilmsList: state.downloadedFilms,
+        MaxFilms: FilmsCountForView.Max,
+        MinFilms: FilmsCountForView.Min,
+        StepFilms: FilmsCountForView.Step,
+        LoadMoreFilms: ButtonCondition.Unblocked,
+        tabFromState: 'Overview',
+      };
     default:
       return state;
   }

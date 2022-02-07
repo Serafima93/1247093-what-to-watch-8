@@ -1,4 +1,3 @@
-/*eslint-disable no-console*/
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { FilmStructure } from '../../types/filmCards';

@@ -1,5 +1,3 @@
-/*eslint-disable no-console*/
-
 import { FilmStructure } from '../../types/filmCards';
 
 type cardParameters = {
